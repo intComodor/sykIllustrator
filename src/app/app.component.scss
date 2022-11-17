@@ -1,0 +1,63 @@
+#app {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+app-drawing-board {
+  height: 100%;
+  max-width: calc(90vw - 2*120px);
+  max-height: 90vh;
+  aspect-ratio: 16/9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+app-tools-panel, app-options-panel {
+  width: 120px;
+  height: 300px;
+}
+
+app-tools-panel {
+  margin-left: 2vw;
+}
+
+app-options-panel {
+  margin-right: 2vw;
+}
+
+#resize-msg {
+  background-color: #212121;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: none;
+
+  span {
+    font-size: 1rem;
+    font-weight: normal;
+  }
+}
+
+
+@media only screen and (max-width:360px) {
+  #resize-msg {
+    display: flex;
+  }
+}
+@media only screen and (max-height:320px) {
+  #resize-msg {
+    display: flex;
+  }
+}
