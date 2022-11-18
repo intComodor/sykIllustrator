@@ -11,7 +11,15 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    let element = document.getElementById("app") as HTMLElement;
+
+  }
+
+  title = 'syk-illustrator';
+
+
+
+  onclick() {
+    let element = document.getElementById("testid") as HTMLElement;
     html2canvas(element).then(function(canvas) {
         // Convert the canvas to blob
         canvas.toBlob(function(blob: any) {
@@ -23,15 +31,13 @@ export class AppComponent implements OnInit {
 
             // To save manually somewhere in file explorer
             // window.saveAs(blob, 'image.png');
-            
+
 
         },'image/png');
     });
 
-  }
-  
-  title = 'syk-illustrator';
 
-  
+  }
+
 }
 

@@ -1,9 +1,11 @@
 <div id="app">
+
   <div id="resize-msg">
     please resize your browser
     <span>min height : 320px</span>
     <span>min width : 360px</span>
   </div>
+
   <div id="header">
     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
     width="20" height="20"
@@ -13,13 +15,19 @@
     </svg>
     &nbsp;SYK Illustrator
   </div>
+
   <div id="title">
+    <span class="material-icons">clear</span>
     <input type="text" placeholder="Untitled">
+    <span class="material-icons" (click)="onclick()">save</span>
   </div>
+
   <app-tools-panel></app-tools-panel>
   <app-drawing-board></app-drawing-board>
   <app-options-panel></app-options-panel>
+
   <div id="footer">
     by<span>&nbsp;S</span>tephen FOERSTER - <span>&nbsp;Y</span>ouness BASRI - <span>&nbsp;K</span>arim BOUALI
   </div>
+
 </div>

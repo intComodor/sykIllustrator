@@ -56,12 +56,12 @@ app-options-panel {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 23px;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #525252;
-  font-size: 0.45rem;
+  font-size: 0.6rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 #footer span {
@@ -79,7 +79,7 @@ app-options-panel {
   color: #525252;
   font-size: 0.7rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  
+
   display: flex;
   align-items: center;
 }
@@ -94,6 +94,19 @@ app-options-panel {
   margin-top: 5vh;
 }
 
+#title span {
+  color: white;
+  border: #525252 1px dotted;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+  // margin-right: 5px;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+}
+
 #title input {
   color: white;
   background-color: #212121;
@@ -102,6 +115,8 @@ app-options-panel {
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
+  max-width: 200px;
+  margin-left: 20px;
 }
 
 @media only screen and (max-width:360px) {
