@@ -10,7 +10,7 @@
 app-drawing-board {
   height: 100%;
   max-width: calc(90vw - 2*120px);
-  max-height: 70vh;
+  max-height: 90vh;
   aspect-ratio: 16/9;
   display: flex;
   justify-content: center;
@@ -68,6 +68,11 @@ app-options-panel {
   color: #626262;
   font-weight: bold;
 }
+#footer a {
+  text-decoration: none;
+  color: #525252;
+}
+
 
 #header {
   position: absolute;
@@ -84,40 +89,39 @@ app-options-panel {
   align-items: center;
 }
 
-#title {
-  font-weight: bold;
+app-header {
   position: absolute;
   top: 0;
-  display: flex;
-  justify-content: center;
+  // display: flex;
+  // justify-content: center;
   width: 100%;
   margin-top: 5vh;
 }
 
-#title span {
-  color: white;
-  border: #525252 1px dotted;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 5px;
-  // margin-right: 5px;
-  height: 40px;
-  width: 40px;
-  cursor: pointer;
-}
+// #title span {
+//   color: white;
+//   border: #525252 1px dotted;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   margin-left: 5px;
+//   // margin-right: 5px;
+//   height: 40px;
+//   width: 40px;
+//   cursor: pointer;
+// }
 
-#title input {
-  color: white;
-  background-color: #212121;
-  border: #525252 1px dotted;
-  outline: none;
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-  max-width: 200px;
-  margin-left: 20px;
-}
+// #title input {
+//   color: white;
+//   background-color: #212121;
+//   border: #525252 1px dotted;
+//   outline: none;
+//   font-size: 2rem;
+//   font-weight: bold;
+//   text-align: center;
+//   max-width: 200px;
+//   margin-left: 20px;
+// }
 
 @media only screen and (max-width:360px) {
   #resize-msg {

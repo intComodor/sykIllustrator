@@ -1,0 +1,35 @@
+#title {
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  // width: 100%;
+}
+
+ span {
+  color: white;
+  border: #525252 1px dotted;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+  // margin-right: 5px;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+}
+span:hover {
+  transform: scale(1.05);
+  transition: 0.2s;
+}
+
+ input {
+  color: white;
+  background-color: #212121;
+  border: #525252 1px dotted;
+  outline: none;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  max-width: 200px;
+  margin-left: 20px;
+}
