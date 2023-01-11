@@ -18,26 +18,7 @@ export class AppComponent implements OnInit {
 
 
 
-  onclick() {
-    let element = document.getElementById("testid") as HTMLElement;
-    html2canvas(element).then(function(canvas) {
-        // Convert the canvas to blob
-        canvas.toBlob(function(blob: any) {
-            // To download directly on browser default 'downloads' location
-            let link = document.createElement("a");
-            link.download = "image.png";
-            link.href = URL.createObjectURL(blob);
-            link.click();
 
-            // To save manually somewhere in file explorer
-            // window.saveAs(blob, 'image.png');
-
-
-        },'image/png');
-    });
-
-
-  }
 
 }
 

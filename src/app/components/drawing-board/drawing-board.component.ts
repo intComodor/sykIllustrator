@@ -9,7 +9,18 @@ export class DrawingBoardComponent implements OnInit {
 
   constructor() { }
 
+  click: boolean = false;
+
   ngOnInit(): void {
+  }
+
+  onclick() {
+    if (this.click) {
+      this.click = false;
+    }
+    else {
+      this.click = true;
+    }
   }
 
 }
