@@ -1,3 +1,5 @@
-<div id="board" (click)="onclick()" [ngClass]="click ? 'sketch' : 'sketch2'">
+<div id="board" class="board">
+    <canvas id="canvas" (mousedown)="startDrawing($event)" (mousemove)="drawing($event)" (mouseup)="stopDrawing()" class="canvas">
 
+    </canvas>
 </div>

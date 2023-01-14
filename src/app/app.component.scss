@@ -7,15 +7,15 @@
   margin-top: 5vh;
 }
 
-app-drawing-board {
-  height: 100%;
-  max-width: calc(90vw - 2*120px);
-  max-height: 90vh;
-  aspect-ratio: 16/9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+// app-drawing-board {
+  // height: 100%;
+  // max-width: calc(90vw - 2*120px);
+  // max-height: 90vh;
+  // aspect-ratio: 16/9;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+// }
 
 app-tools-panel, app-options-panel {
   width: 120px;
