@@ -9,8 +9,14 @@ export class DrawingBoardComponent implements OnInit {
 
   constructor() { }
 
+  private formatsBoard: number[] = [16/9, 4/3, 1/1, 21/9, 32/9];
+  private indexFormatBoard: number = 0;
+
   isDrawing: boolean = false;
-  format: number = 16/9;
+  format: number = this.formatsBoard[this.indexFormatBoard];
+
+  color: string = "black";
+  lineWidth: number = 1;
 
   // canvas
   canvasRef: HTMLCanvasElement = document.getElementById("board") as HTMLCanvasElement;
@@ -47,8 +53,8 @@ export class DrawingBoardComponent implements OnInit {
     let canvas = document.getElementById("board") as HTMLCanvasElement;
     let ctx = canvas.getContext("2d");
     if (!ctx) { return; }
-    ctx.strokeStyle = "red";
-    ctx.lineWidth = 2;
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = this.lineWidth;
     ctx.lineTo(event.offsetX, event.offsetY);
     ctx.stroke();
   }
@@ -80,7 +86,7 @@ export class DrawingBoardComponent implements OnInit {
       }
     }
 
-    this.ctx.drawImage(this.inMemCanvas, 0, 0);
+    this.ctx.drawImage(this.inMemCanvas, 0, 0, this.canvasRef.width, this.canvasRef.height);
   }
 
   @HostListener('window:resize', ['$event'])

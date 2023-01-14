@@ -11,14 +11,13 @@ export class HeaderComponent {
 
   constructor() { }
 
-  private formatsBoard: string[] = ["16/9", "4/3", "1/1", "21/9", "32/9"];
-  private indexFormatBoard: number = 0;
+  
 
   filename = new FormControl('');
 
 
   onSave() {
-    let element = document.getElementById("title") as HTMLElement;
+    let element = document.getElementById("board") as HTMLElement;
 
     html2canvas(element).then((canvas) => {
         // Convert the canvas to blob
@@ -35,13 +34,7 @@ export class HeaderComponent {
   }
 
   onChangeFormat() {
-    let element = document.querySelector('app-drawing-board') as HTMLElement;
-    let element2 = document.getElementById('board') as HTMLElement;
-
-    this.indexFormatBoard = (this.indexFormatBoard + 1) % this.formatsBoard.length;
-
-    element.style.aspectRatio = this.formatsBoard[this.indexFormatBoard];
-    element2.style.aspectRatio = this.formatsBoard[this.indexFormatBoard];
+    
   }
 
   onZoom() {
