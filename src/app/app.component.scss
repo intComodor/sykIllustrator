@@ -30,27 +30,27 @@ app-options-panel {
   margin-right: 2vw;
 }
 
-#resize-msg {
-  background-color: #212121;
-  position: absolute;
-  z-index: 1;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: white;
-  font-size: 2rem;
-  font-weight: bold;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: none;
+// #resize-msg {
+//   background-color: #212121;
+//   position: absolute;
+//   z-index: 1;
+//   height: 100vh;
+//   width: 100vw;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-direction: column;
+//   color: white;
+//   font-size: 2rem;
+//   font-weight: bold;
+//   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+//   display: none;
 
-  span {
-    font-size: 1rem;
-    font-weight: normal;
-  }
-}
+//   span {
+//     font-size: 1rem;
+//     font-weight: normal;
+//   }
+// }
 
 #footer {
   position: absolute;
@@ -123,13 +123,13 @@ app-header {
 //   margin-left: 20px;
 // }
 
-@media only screen and (max-width:360px) {
-  #resize-msg {
-    display: flex;
-  }
-}
-@media only screen and (max-height:320px) {
-  #resize-msg {
-    display: flex;
-  }
-}
+// @media only screen and (max-width:360px) {
+//   #resize-msg {
+//     display: flex;
+//   }
+// }
+// @media only screen and (max-height:320px) {
+//   #resize-msg {
+//     display: flex;
+//   }
+// }
