@@ -70,8 +70,14 @@ export class DrawingBoardComponent implements OnInit {
     this.inMemCanvas.height = this.canvasRef.offsetHeight;
     this.inMemCtx.drawImage(this.canvasRef, 0, 0);
 
-    this.canvasRef.width = window.innerWidth*0.9 - 2*120;
-    this.canvasRef.height = window.innerHeight*0.7;
+    if (window.innerWidth < 700 || window.innerHeight < 400) {
+      this.canvasRef.width = window.innerWidth;
+      this.canvasRef.height = window.innerHeight;
+    }
+    else {
+      this.canvasRef.width = window.innerWidth*0.9 - 2*120;
+      this.canvasRef.height = window.innerHeight*0.7;
+    }
 
     let width = this.canvasRef.offsetWidth;
     let height = this.canvasRef.offsetHeight;

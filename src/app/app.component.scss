@@ -7,16 +7,6 @@
   margin-top: 5vh;
 }
 
-// app-drawing-board {
-  // height: 100%;
-  // max-width: calc(90vw - 2*120px);
-  // max-height: 90vh;
-  // aspect-ratio: 16/9;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-// }
-
 app-tools-panel, app-options-panel {
   width: 120px;
   height: 300px;
@@ -28,28 +18,6 @@ app-tools-panel {
 
 app-options-panel {
   margin-right: 2vw;
-}
-
-#resize-msg {
-  background-color: #212121;
-  position: absolute;
-  z-index: 1;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: white;
-  font-size: 2rem;
-  font-weight: bold;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: none;
-
-  span {
-    font-size: 1rem;
-    font-weight: normal;
-  }
 }
 
 #footer {
@@ -80,7 +48,6 @@ app-options-panel {
   width: 100%;
   margin-top: 10px;
   margin-left: 10px;
-  // height: 30px;
   color: #525252;
   font-size: 0.7rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -92,44 +59,32 @@ app-options-panel {
 app-header {
   position: absolute;
   top: 0;
-  // display: flex;
-  // justify-content: center;
   width: 100%;
   margin-top: 5vh;
 }
 
-// #title span {
-//   color: white;
-//   border: #525252 1px dotted;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   margin-left: 5px;
-//   // margin-right: 5px;
-//   height: 40px;
-//   width: 40px;
-//   cursor: pointer;
-// }
+@media only screen and (max-width: 700px) {
+  #header, #footer, app-header, app-tools-panel, app-options-panel {
+    display: none;
+  }
 
-// #title input {
-//   color: white;
-//   background-color: #212121;
-//   border: #525252 1px dotted;
-//   outline: none;
-//   font-size: 2rem;
-//   font-weight: bold;
-//   text-align: center;
-//   max-width: 200px;
-//   margin-left: 20px;
-// }
-
-@media only screen and (max-width:360px) {
-  #resize-msg {
-    display: flex;
+  app-drawing-board {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
-@media only screen and (max-height:320px) {
-  #resize-msg {
-    display: flex;
+
+@media only screen and (max-height: 400px) {
+  #header, #footer, app-header, app-tools-panel, app-options-panel {
+    display: none;
+  }
+
+  app-drawing-board {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
