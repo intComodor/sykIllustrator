@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import html2canvas from 'html2canvas';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-header',
@@ -9,12 +10,11 @@ import html2canvas from 'html2canvas';
 })
 export class HeaderComponent {
 
-  constructor() { }
-
-  
+  constructor(private data: DataService) { 
+    
+  }
 
   filename = new FormControl('');
-
 
   onSave() {
     let element = document.getElementById("board") as HTMLElement;
@@ -34,7 +34,7 @@ export class HeaderComponent {
   }
 
   onChangeFormat() {
-    
+    this.data.changeFormat();
   }
 
   onZoom() {

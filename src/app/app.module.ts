@@ -6,6 +6,7 @@ import { DrawingBoardComponent } from './components/drawing-board/drawing-board.
 import { ToolsPanelComponent } from './components/tools-panel/tools-panel.component';
 import { OptionsPanelComponent } from './components/options-panel/options-panel.component';
 import { HeaderComponent } from './components/header/header.component';
+import { DataService } from './services/data.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
@@ -21,7 +22,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    DataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

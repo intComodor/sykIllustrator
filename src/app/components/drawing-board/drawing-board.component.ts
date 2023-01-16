@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-drawing-board',
@@ -7,7 +8,14 @@ import { Component, HostListener, OnInit } from '@angular/core';
 })
 export class DrawingBoardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private data: DataService) {
+    // The approach in Angular 6 is to declare in constructor
+    this.data.listenFormat.subscribe(_ => {
+      this.indexFormatBoard = (this.indexFormatBoard + 1) % this.formatsBoard.length;
+      this.format = this.formatsBoard[this.indexFormatBoard];
+      this.resizeToFormat();
+    });
+  }
 
   private formatsBoard: number[] = [16/9, 4/3, 1/1, 21/9, 32/9];
   private indexFormatBoard: number = 0;
