@@ -27,8 +27,8 @@ export class DrawingBoardComponent implements OnInit {
   lineWidth: number = 1;
 
   // canvas
-  canvasRef: HTMLCanvasElement = document.getElementById("board") as HTMLCanvasElement;
-  ctx: CanvasRenderingContext2D = this.canvasRef?.getContext('2d') as CanvasRenderingContext2D;
+  canvasRef: HTMLCanvasElement | undefined;
+  ctx: CanvasRenderingContext2D | undefined;
 
   // in memory canvas
   inMemCanvas: HTMLCanvasElement = document.createElement('canvas');
@@ -73,6 +73,8 @@ export class DrawingBoardComponent implements OnInit {
 
   resizeToFormat() {
 
+    if (this.canvasRef === undefined) { return; }
+    if (this.ctx === undefined) { return; }
     
     this.inMemCanvas.width = this.canvasRef.offsetWidth;
     this.inMemCanvas.height = this.canvasRef.offsetHeight;
