@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
+import { HeaderService } from 'src/app/services/header.service';
 
 @Component({
   selector: 'app-drawing-board',
@@ -8,12 +8,20 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class DrawingBoardComponent implements OnInit {
 
-  constructor(private data: DataService) {
+  constructor(private data: HeaderService) {
     // The approach in Angular 6 is to declare in constructor
     this.data.listenFormat.subscribe(_ => {
       this.indexFormatBoard = (this.indexFormatBoard + 1) % this.formatsBoard.length;
       this.format = this.formatsBoard[this.indexFormatBoard];
       this.resizeToFormat();
+    });
+
+    this.data.listenClear.subscribe(_ => {
+      this.clear();
+    });
+
+    this.data.listenFullScreen.subscribe(_ => {
+      this.fullScreen();
     });
   }
 
@@ -103,6 +111,27 @@ export class DrawingBoardComponent implements OnInit {
     }
 
     this.ctx.drawImage(this.inMemCanvas, 0, 0, this.canvasRef.width, this.canvasRef.height);
+  }
+
+  clear() {
+    if (this.ctx === undefined || 
+      this.canvasRef === undefined || 
+      this.canvasRef.width === undefined || 
+      this.canvasRef.height === undefined
+      ) { return; }
+    this.ctx.clearRect(0, 0, this.canvasRef.width, this.canvasRef.height);
+  }
+
+  fullScreen() {
+    let elem = document.getElementById("board") as HTMLCanvasElement;
+    if (!elem) { return; }
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    // } else if (elem.webkitRequestFullscreen) { /* Safari */
+    //   elem.webkitRequestFullscreen();
+    // } else if (elem.msRequestFullscreen) { /* IE11 */
+    //   elem.msRequestFullscreen();
+    }
   }
 
   @HostListener('window:resize', ['$event'])
