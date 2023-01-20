@@ -28,6 +28,8 @@ export class DrawingBoardComponent implements OnInit {
   private formatsBoard: number[] = [16/9, 4/3, 1/1, 21/9, 32/9];
   private indexFormatBoard: number = 0;
 
+  isFullScreen: boolean = false;
+
   isDrawing: boolean = false;
   format: number = this.formatsBoard[this.indexFormatBoard];
 
@@ -88,7 +90,7 @@ export class DrawingBoardComponent implements OnInit {
     this.inMemCanvas.height = this.canvasRef.offsetHeight;
     this.inMemCtx.drawImage(this.canvasRef, 0, 0);
 
-    if (window.innerWidth < 700 || window.innerHeight < 400) {
+    if (window.innerWidth < 700 || window.innerHeight < 400 || this.isFullScreen) {
       this.canvasRef.width = window.innerWidth;
       this.canvasRef.height = window.innerHeight;
     }
@@ -123,15 +125,8 @@ export class DrawingBoardComponent implements OnInit {
   }
 
   fullScreen() {
-    let elem = document.getElementById("board") as HTMLCanvasElement;
-    if (!elem) { return; }
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    // } else if (elem.webkitRequestFullscreen) { /* Safari */
-    //   elem.webkitRequestFullscreen();
-    // } else if (elem.msRequestFullscreen) { /* IE11 */
-    //   elem.msRequestFullscreen();
-    }
+    this.isFullScreen = true;
+    this.resizeToFormat()
   }
 
   @HostListener('window:resize', ['$event'])
@@ -139,6 +134,13 @@ export class DrawingBoardComponent implements OnInit {
     console.log("resizing " + window.innerWidth + " " + window.innerHeight);
 
     this.resizeToFormat();
+  }
+
+
+  @HostListener('mousedown', ['$event.target'])
+  onClick() {
+    this.isFullScreen = false;
+    this.resizeToFormat()
   }
 
 }

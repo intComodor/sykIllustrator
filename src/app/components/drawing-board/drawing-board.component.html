@@ -1,3 +1,5 @@
-<canvas id="board" (mousedown)="startDrawing($event)" (mousemove)="drawing($event)" (mouseup)="stopDrawing()" class="board">
+<canvas [ngClass]="{'full' : isFullScreen}" id="board" (mousedown)="startDrawing($event)" (mousemove)="drawing($event)" (mouseup)="stopDrawing()" class="board">
 
 </canvas>
+
+<div [ngClass]="{'back' : isFullScreen}" [style.display]="isFullScreen ? 'block' : 'none'"></div>
