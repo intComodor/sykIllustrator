@@ -1,0 +1,23 @@
+{
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "html"
+        }
+      },
+      {
+        "files": "*.scss",
+        "options": {
+          "parser": "scss"
+        }
+      },
+      {
+        "files": "*.ts",
+        "options": {
+          "parser": "typescript"
+        }
+      }
+    ]
+  }
+  
