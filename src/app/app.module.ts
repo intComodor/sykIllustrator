@@ -8,6 +8,7 @@ import { OptionsPanelComponent } from './components/options-panel/options-panel.
 import { HeaderComponent } from './components/header/header.component';
 import { HeaderService } from './services/header.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { DrawingDataService } from './services/drawing-data.service';
 
 @NgModule({
   declarations: [
@@ -23,8 +24,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     FormsModule
   ],
   providers: [
+    DrawingDataService,
     HeaderService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
