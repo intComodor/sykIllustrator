@@ -9,6 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { HeaderService } from './services/header.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DrawingDataService } from './services/drawing-data.service';
+import { MouseEventService } from './services/mouse-event.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DrawingDataService } from './services/drawing-data.service';
   ],
   providers: [
     DrawingDataService,
-    HeaderService
+    HeaderService,
+    MouseEventService
   ],
   bootstrap: [AppComponent]
 })

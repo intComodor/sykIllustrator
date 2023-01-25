@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class DrawingDataService {
-  private color: string = 'red';
-  private lineWidth: number = 1;
-  private isDrawing: boolean = false;
+  private color = 'red';
+  private lineWidth = 2;
+  private isDrawing = false;
 
   getColor(): string {
     return this.color;
