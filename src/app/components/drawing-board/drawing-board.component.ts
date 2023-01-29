@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { HeaderService } from 'src/app/services/header.service';
 
 @Component({
   selector: 'app-drawing-board',
@@ -7,10 +8,27 @@ import { Component, HostListener, OnInit } from '@angular/core';
 })
 export class DrawingBoardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private data: HeaderService) {
+    // The approach in Angular 6 is to declare in constructor
+    this.data.listenFormat.subscribe(_ => {
+      this.indexFormatBoard = (this.indexFormatBoard + 1) % this.formatsBoard.length;
+      this.format = this.formatsBoard[this.indexFormatBoard];
+      this.resizeToFormat();
+    });
+
+    this.data.listenClear.subscribe(_ => {
+      this.clear();
+    });
+
+    this.data.listenFullScreen.subscribe(_ => {
+      this.fullScreen();
+    });
+  }
 
   private formatsBoard: number[] = [16/9, 4/3, 1/1, 21/9, 32/9];
   private indexFormatBoard: number = 0;
+
+  isFullScreen: boolean = false;
 
   isDrawing: boolean = false;
   format: number = this.formatsBoard[this.indexFormatBoard];
@@ -19,8 +37,8 @@ export class DrawingBoardComponent implements OnInit {
   lineWidth: number = 1;
 
   // canvas
-  canvasRef: HTMLCanvasElement = document.getElementById("board") as HTMLCanvasElement;
-  ctx: CanvasRenderingContext2D = this.canvasRef?.getContext('2d') as CanvasRenderingContext2D;
+  canvasRef: HTMLCanvasElement | undefined;
+  ctx: CanvasRenderingContext2D | undefined;
 
   // in memory canvas
   inMemCanvas: HTMLCanvasElement = document.createElement('canvas');
@@ -65,12 +83,14 @@ export class DrawingBoardComponent implements OnInit {
 
   resizeToFormat() {
 
+    if (this.canvasRef === undefined) { return; }
+    if (this.ctx === undefined) { return; }
     
     this.inMemCanvas.width = this.canvasRef.offsetWidth;
     this.inMemCanvas.height = this.canvasRef.offsetHeight;
     this.inMemCtx.drawImage(this.canvasRef, 0, 0);
 
-    if (window.innerWidth < 700 || window.innerHeight < 400) {
+    if (window.innerWidth < 700 || window.innerHeight < 400 || this.isFullScreen) {
       this.canvasRef.width = window.innerWidth;
       this.canvasRef.height = window.innerHeight;
     }
@@ -95,11 +115,32 @@ export class DrawingBoardComponent implements OnInit {
     this.ctx.drawImage(this.inMemCanvas, 0, 0, this.canvasRef.width, this.canvasRef.height);
   }
 
+  clear() {
+    if (this.ctx === undefined || 
+      this.canvasRef === undefined || 
+      this.canvasRef.width === undefined || 
+      this.canvasRef.height === undefined
+      ) { return; }
+    this.ctx.clearRect(0, 0, this.canvasRef.width, this.canvasRef.height);
+  }
+
+  fullScreen() {
+    this.isFullScreen = true;
+    this.resizeToFormat()
+  }
+
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     console.log("resizing " + window.innerWidth + " " + window.innerHeight);
 
     this.resizeToFormat();
+  }
+
+
+  @HostListener('mousedown', ['$event.target'])
+  onClick() {
+    this.isFullScreen = false;
+    this.resizeToFormat()
   }
 
 }

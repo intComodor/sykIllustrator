@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import html2canvas from 'html2canvas';
+import { HeaderService } from 'src/app/services/header.service';
 
 @Component({
   selector: 'app-header',
@@ -9,12 +10,11 @@ import html2canvas from 'html2canvas';
 })
 export class HeaderComponent {
 
-  constructor() { }
-
-  
+  constructor(private data: HeaderService) { 
+    
+  }
 
   filename = new FormControl('');
-
 
   onSave() {
     let element = document.getElementById("board") as HTMLElement;
@@ -34,12 +34,15 @@ export class HeaderComponent {
   }
 
   onChangeFormat() {
-    
+    this.data.changeFormat();
   }
 
-  onZoom() {
-    let element = document.querySelector('app-drawing-board') as HTMLElement;
-    element.style.transform = 'scale(1.2)';
+  onClear() {
+    this.data.clear();
+  }
+
+  onFullScreen() {
+    this.data.setFullScreen();
   }
 
 }
