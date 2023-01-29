@@ -1,19 +1,31 @@
-import { Component, HostListener, OnInit } from '@angular/core';
 import { HeaderService } from 'src/app/services/header.service';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  ViewChild,
+} from '@angular/core';
+import { CanvasResizeService } from 'src/app/services/canvas-resize.service';
+import { DrawingDataService } from 'src/app/services/drawing-data.service';
+import { MouseEventService } from 'src/app/services/mouse-event.service';
 
 @Component({
   selector: 'app-drawing-board',
   templateUrl: './drawing-board.component.html',
-  styleUrls: ['./drawing-board.component.scss']
+  styleUrls: ['./drawing-board.component.scss'],
 })
-export class DrawingBoardComponent implements OnInit {
+export class DrawingBoardComponent implements AfterViewInit {
+  @ViewChild('board', { static: true }) _canvas: ElementRef | undefined;
 
-  constructor(private data: HeaderService) {
-    // The approach in Angular 6 is to declare in constructor
+  constructor(
+    private data: HeaderService,
+    private drawingDataService: DrawingDataService,
+    private mouseEventService: MouseEventService,
+    private canvasResizeService: CanvasResizeService
+  ) {
     this.data.listenFormat.subscribe(_ => {
-      this.indexFormatBoard = (this.indexFormatBoard + 1) % this.formatsBoard.length;
-      this.format = this.formatsBoard[this.indexFormatBoard];
-      this.resizeToFormat();
+      this.canvasResizeService.resizeCanvas(this.canvas, this.canvasCtx, true);
     });
 
     this.data.listenClear.subscribe(_ => {
@@ -25,122 +37,53 @@ export class DrawingBoardComponent implements OnInit {
     });
   }
 
-  private formatsBoard: number[] = [16/9, 4/3, 1/1, 21/9, 32/9];
-  private indexFormatBoard: number = 0;
-
-  isFullScreen: boolean = false;
-
-  isDrawing: boolean = false;
-  format: number = this.formatsBoard[this.indexFormatBoard];
-
-  color: string = "black";
-  lineWidth: number = 1;
+  isFullScreen = false;
 
   // canvas
-  canvasRef: HTMLCanvasElement | undefined;
-  ctx: CanvasRenderingContext2D | undefined;
+  _canvasCtx: CanvasRenderingContext2D | undefined;
 
-  // in memory canvas
-  inMemCanvas: HTMLCanvasElement = document.createElement('canvas');
-  inMemCtx: CanvasRenderingContext2D = this.inMemCanvas.getContext('2d') as CanvasRenderingContext2D;
-
-  ngOnInit(): void {
-    // canvas
-    this.canvasRef = document.getElementById("board") as HTMLCanvasElement;
-    this.ctx = this.canvasRef.getContext('2d') as CanvasRenderingContext2D;
-
-    this.resizeToFormat();
+  public get canvas(): HTMLCanvasElement {
+    if (!this._canvas) throw new Error('Canvas Element is not defined');
+    return this._canvas.nativeElement as HTMLCanvasElement;
   }
 
-  startDrawing(event: MouseEvent) {
-    let canvas = document.getElementById("board") as HTMLCanvasElement;
-    let rect = canvas.getBoundingClientRect();
-    let x = event.clientX - rect.left;
-    let y = event.clientY - rect.top;
-    let ctx = canvas.getContext("2d");
-    if (!ctx) { return; }
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    this.isDrawing = true;
-  }
-  
-  
-  drawing(event: MouseEvent) {
-    console.log("drawing " + event.offsetX + " " + event.offsetY);
-    if (!this.isDrawing) { return; }
-    let canvas = document.getElementById("board") as HTMLCanvasElement;
-    let ctx = canvas.getContext("2d");
-    if (!ctx) { return; }
-    ctx.strokeStyle = this.color;
-    ctx.lineWidth = this.lineWidth;
-    ctx.lineTo(event.offsetX, event.offsetY);
-    ctx.stroke();
-  }
-  
-  stopDrawing() {
-    this.isDrawing = false;
+  public get canvasCtx(): CanvasRenderingContext2D {
+    if (!this._canvasCtx) throw new Error('Canvas Context is not defined');
+    return this._canvasCtx;
   }
 
-  resizeToFormat() {
+  ngAfterViewInit(): void {
+    this._canvasCtx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
+    this.canvasResizeService.resizeCanvas(this.canvas, this.canvasCtx);
 
-    if (this.canvasRef === undefined) { return; }
-    if (this.ctx === undefined) { return; }
-    
-    this.inMemCanvas.width = this.canvasRef.offsetWidth;
-    this.inMemCanvas.height = this.canvasRef.offsetHeight;
-    this.inMemCtx.drawImage(this.canvasRef, 0, 0);
-
-    if (window.innerWidth < 700 || window.innerHeight < 400 || this.isFullScreen) {
-      this.canvasRef.width = window.innerWidth;
-      this.canvasRef.height = window.innerHeight;
-    }
-    else {
-      this.canvasRef.width = window.innerWidth*0.9 - 2*120;
-      this.canvasRef.height = window.innerHeight*0.7;
-    }
-
-    let width = this.canvasRef.offsetWidth;
-    let height = this.canvasRef.offsetHeight;
-    
-
-    if(width/height !== this.format) {
-      if(width/height > this.format){
-        this.canvasRef.width = height * this.format;
-      }
-      else {
-        this.canvasRef.height = width / this.format;
-      }
-    }
-
-    this.ctx.drawImage(this.inMemCanvas, 0, 0, this.canvasRef.width, this.canvasRef.height);
+    const mousedrag$ = this.mouseEventService.mousedrag$(this.canvas);
+    mousedrag$.subscribe(coords => {
+      this.canvasCtx.strokeStyle = this.drawingDataService.getColor();
+      this.canvasCtx.lineWidth = this.drawingDataService.getLineWidth();
+      this.canvasCtx.beginPath();
+      this.canvasCtx.moveTo(coords.x1, coords.y1);
+      this.canvasCtx.lineTo(coords.x2, coords.y2);
+      this.canvasCtx.stroke();
+    });
   }
 
   clear() {
-    if (this.ctx === undefined || 
-      this.canvasRef === undefined || 
-      this.canvasRef.width === undefined || 
-      this.canvasRef.height === undefined
-      ) { return; }
-    this.ctx.clearRect(0, 0, this.canvasRef.width, this.canvasRef.height);
+    this.canvasCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   fullScreen() {
     this.isFullScreen = true;
-    this.resizeToFormat()
+    this.canvasResizeService.resizeCanvas(this.canvas, this.canvasCtx);
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    console.log("resizing " + window.innerWidth + " " + window.innerHeight);
-
-    this.resizeToFormat();
+  onResize() {
+    this.canvasResizeService.resizeCanvas(this.canvas, this.canvasCtx);
   }
-
 
   @HostListener('mousedown', ['$event.target'])
   onClick() {
     this.isFullScreen = false;
-    this.resizeToFormat()
+    this.canvasResizeService.resizeCanvas(this.canvas, this.canvasCtx);
   }
-
 }
