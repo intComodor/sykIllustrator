@@ -6,7 +6,7 @@ import {
   HostListener,
   ViewChild,
 } from '@angular/core';
-import { CanvasResizeService } from 'src/app/services/canvas-resize.service';
+import { CanvasService } from 'src/app/services/canvas.service';
 import { DrawingDataService } from 'src/app/services/drawing-data.service';
 import { MouseEventService } from 'src/app/services/mouse-event.service';
 
@@ -19,27 +19,27 @@ export class DrawingBoardComponent implements AfterViewInit {
   @ViewChild('board', { static: true }) _canvas: ElementRef | undefined;
 
   constructor(
-    private data: HeaderService,
+    private headerService: HeaderService,
     private drawingDataService: DrawingDataService,
     private mouseEventService: MouseEventService,
-    private canvasResizeService: CanvasResizeService
+    private canvasService: CanvasService
   ) {
-    this.data.listenFormat.subscribe(_ => {
-      this.canvasResizeService.resizeCanvas(this.canvas, this.canvasCtx, true);
+    this.headerService.listenFormat.subscribe(_ => {
+      this.canvasService.resize(this.canvas, this.canvasCtx, true);
     });
 
-    this.data.listenClear.subscribe(_ => {
-      this.clear();
+    this.headerService.listenClear.subscribe(_ => {
+      this.canvasService.clear(this.canvas, this.canvasCtx);
     });
 
-    this.data.listenFullScreen.subscribe(_ => {
-      this.fullScreen();
+    this.headerService.listenFullScreen.subscribe(_ => {
+      this.isFullScreen = true;
+      this.canvasService.resize(this.canvas, this.canvasCtx);
     });
   }
 
   isFullScreen = false;
 
-  // canvas
   _canvasCtx: CanvasRenderingContext2D | undefined;
 
   public get canvas(): HTMLCanvasElement {
@@ -54,7 +54,7 @@ export class DrawingBoardComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this._canvasCtx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
-    this.canvasResizeService.resizeCanvas(this.canvas, this.canvasCtx);
+    this.canvasService.resize(this.canvas, this.canvasCtx);
 
     const mousedrag$ = this.mouseEventService.mousedrag$(this.canvas);
     mousedrag$.subscribe(coords => {
@@ -67,23 +67,14 @@ export class DrawingBoardComponent implements AfterViewInit {
     });
   }
 
-  clear() {
-    this.canvasCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-  }
-
-  fullScreen() {
-    this.isFullScreen = true;
-    this.canvasResizeService.resizeCanvas(this.canvas, this.canvasCtx);
-  }
-
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.canvasResizeService.resizeCanvas(this.canvas, this.canvasCtx);
+    this.canvasService.resize(this.canvas, this.canvasCtx);
   }
 
   @HostListener('mousedown', ['$event.target'])
   onClick() {
     this.isFullScreen = false;
-    this.canvasResizeService.resizeCanvas(this.canvas, this.canvasCtx);
+    this.canvasService.resize(this.canvas, this.canvasCtx);
   }
 }

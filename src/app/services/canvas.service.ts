@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class CanvasResizeService {
+export class CanvasService {
   private minWidth = 700;
   private minHeight = 400;
 
@@ -11,7 +11,7 @@ export class CanvasResizeService {
   private indexFormatBoard = 0;
   format: number = this.formatsBoard[this.indexFormatBoard];
 
-  resizeCanvas(
+  resize(
     canvas: HTMLCanvasElement,
     canvasCtx: CanvasRenderingContext2D,
     changeFormat?: boolean
@@ -62,5 +62,9 @@ export class CanvasResizeService {
 
     // Restore the previous canvas image to the resized canvas
     canvasCtx.drawImage(inMemCanvas, 0, 0, canvas.width, canvas.height);
+  }
+
+  clear(canvas: HTMLCanvasElement, canvasCtx: CanvasRenderingContext2D) {
+    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
   }
 }

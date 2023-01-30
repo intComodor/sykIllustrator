@@ -3,7 +3,6 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export class HeaderService {
-
   private sendFormat = new Subject();
   private sendClearBoard = new Subject();
   private sendFullScreen = new Subject();
@@ -12,18 +11,15 @@ export class HeaderService {
   listenClear = this.sendClearBoard.asObservable();
   listenFullScreen = this.sendFullScreen.asObservable();
 
-  constructor() { }
-
   changeFormat() {
-    this.sendFormat.next("")
+    this.sendFormat.next('');
   }
 
   clear() {
-    this.sendClearBoard.next("")
+    this.sendClearBoard.next('');
   }
 
   setFullScreen() {
-    this.sendFullScreen.next("")
+    this.sendFullScreen.next('');
   }
-
 }
