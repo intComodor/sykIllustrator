@@ -1,8 +1,8 @@
-<div class="option-panel">
-  <div
+<div class="option-panel" style="">
+  <!-- <div
     class="color-box"
     (click)="setColor('black')"
-    [ngStyle]="{ 'background-color': 'black' }"></div>
+    [ngStyle]="{ 'background-color': 'black' }"></div> -->
   <!-- <div
     class="color-box"
     (click)="setColor('silver')"
@@ -59,7 +59,7 @@
     class="color-box"
     (click)="setColor('teal')"
     [ngStyle]="{ 'background-color': 'teal' }"></div> -->
-  <div
+  <!-- <div
     class="color-box"
     (click)="setColor('aqua')"
     [ngStyle]="{ 'background-color': 'aqua' }"></div>
@@ -70,5 +70,36 @@
     max="50"
     step="1"
     [(ngModel)]="lineWidth"
-    (ngModelChange)="setLineWidth(lineWidth)" />
+    (ngModelChange)="setLineWidth(lineWidth)" /> -->
+
+  <!-- <div class="color-box" (click)="setColor('black')">
+    <div class="color-box-inner" 
+      [ngStyle]="{ 'background-color': 'black' }"
+    ></div>
+  </div> -->
+
+  <ng-container *ngFor="let color of colors">
+    <div
+      class="color-box"
+      (click)="setColor(color)"
+      [ngStyle]="
+        color === currentColor() ? { border: '#323232 solid 1px' } : {}
+      ">
+      <div
+        class="color-box-inner"
+        [ngStyle]="{ 'background-color': color }"></div>
+    </div>
+  </ng-container>
+
+  <div>
+    <input
+      style="width: 105px; color: red"
+      class="slider-line-width"
+      type="range"
+      min="1"
+      max="50"
+      step="1"
+      [(ngModel)]="lineWidth"
+      (ngModelChange)="setLineWidth(lineWidth)" />
+  </div>
 </div>

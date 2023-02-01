@@ -10,6 +10,21 @@ export class OptionsPanelComponent {
   constructor(private drawingDataService: DrawingDataService) {}
   lineWidth = 2;
 
+  colors: string[] = [
+    'black',
+    'red',
+    'blue',
+    'green',
+    'yellow',
+    'orange',
+    'purple',
+    'brown',
+  ];
+
+  currentColor(): string {
+    return this.drawingDataService.getColor();
+  }
+
   setColor(color: string) {
     this.drawingDataService.setColor(color);
   }

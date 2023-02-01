@@ -33,12 +33,14 @@ export class DrawingBoardComponent implements AfterViewInit {
     });
 
     this.headerService.listenFullScreen.subscribe(_ => {
-      this.isFullScreen = true;
+      this.canvasService.setFullScreen(true);
       this.canvasService.resize(this.canvas, this.canvasCtx);
     });
   }
 
-  isFullScreen = false;
+  get isFullScreen() {
+    return this.canvasService.isFullScreen;
+  }
 
   _canvasCtx: CanvasRenderingContext2D | undefined;
 
@@ -74,7 +76,7 @@ export class DrawingBoardComponent implements AfterViewInit {
 
   @HostListener('mousedown', ['$event.target'])
   onClick() {
-    this.isFullScreen = false;
+    this.canvasService.setFullScreen(false);
     this.canvasService.resize(this.canvas, this.canvasCtx);
   }
 }

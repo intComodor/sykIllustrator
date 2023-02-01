@@ -11,6 +11,8 @@ export class CanvasService {
   private indexFormatBoard = 0;
   format: number = this.formatsBoard[this.indexFormatBoard];
 
+  isFullScreen = false;
+
   resize(
     canvas: HTMLCanvasElement,
     canvasCtx: CanvasRenderingContext2D,
@@ -40,7 +42,8 @@ export class CanvasService {
     // Resize the canvas
     if (
       window.innerWidth < this.minWidth ||
-      window.innerHeight < this.minHeight
+      window.innerHeight < this.minHeight ||
+      this.isFullScreen
     ) {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -66,5 +69,9 @@ export class CanvasService {
 
   clear(canvas: HTMLCanvasElement, canvasCtx: CanvasRenderingContext2D) {
     canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  setFullScreen(fullScreen: boolean) {
+    this.isFullScreen = fullScreen;
   }
 }
