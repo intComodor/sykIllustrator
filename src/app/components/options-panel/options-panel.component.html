@@ -1,3 +1,74 @@
-<div>
+<div class="option-panel">
+  <div
+    class="color-box"
+    (click)="setColor('black')"
+    [ngStyle]="{ 'background-color': 'black' }"></div>
+  <!-- <div
+    class="color-box"
+    (click)="setColor('silver')"
+    [ngStyle]="{ 'background-color': 'silver' }"></div>
+  <div
+    class="color-box"
+    (click)="setColor('gray')"
+    [ngStyle]="{ 'background-color': 'gray' }"></div>
+  <div
+    class="color-box"
+    (click)="setColor('white')"
+    [ngStyle]="{ 'background-color': 'white' }"></div>
+  <div
+    class="color-box"
+    (click)="setColor('maroon')"
+    [ngStyle]="{ 'background-color': 'maroon' }"></div>
+  <div
+    class="color-box"
+    (click)="setColor('red')"
+    [ngStyle]="{ 'background-color': 'red' }"></div>
+  <div
+    class="color-box"
+    (click)="setColor('purple')"
+    [ngStyle]="{ 'background-color': 'purple' }"></div>
+  <div
+    class="color-box"
+    (click)="setColor('fuchsia')"
+    [ngStyle]="{ 'background-color': 'fuchsia' }"></div>
+  <div
+    class="color-box"
+    (click)="setColor('green')"
+    [ngStyle]="{ 'background-color': 'green' }"></div>
+  <div
+    class="color-box"
+    (click)="setColor('lime')"
+    [ngStyle]="{ 'background-color': 'lime' }"></div>
+  <div
+    class="color-box"
+    (click)="setColor('olive')"
+    [ngStyle]="{ 'background-color': 'olive' }"></div>
+  <div
+    class="color-box"
+    (click)="setColor('yellow')"
+    [ngStyle]="{ 'background-color': 'yellow' }"></div>
+  <div
+    class="color-box"
+    (click)="setColor('navy')"
+    [ngStyle]="{ 'background-color': 'navy' }"></div>
+  <div
+    class="color-box"
+    (click)="setColor('blue')"
+    [ngStyle]="{ 'background-color': 'blue' }"></div>
+  <div
+    class="color-box"
+    (click)="setColor('teal')"
+    [ngStyle]="{ 'background-color': 'teal' }"></div> -->
+  <div
+    class="color-box"
+    (click)="setColor('aqua')"
+    [ngStyle]="{ 'background-color': 'aqua' }"></div>
+  <input
+    class="slider-line-width"
+    type="range"
+    min="1"
+    max="50"
+    step="1"
+    [(ngModel)]="lineWidth"
+    (ngModelChange)="setLineWidth(lineWidth)" />
 </div>
-
