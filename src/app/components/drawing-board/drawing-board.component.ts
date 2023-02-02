@@ -25,56 +25,53 @@ export class DrawingBoardComponent implements AfterViewInit {
     private canvasService: CanvasService
   ) {
     this.headerService.listenFormat.subscribe(_ => {
-      this.canvasService.resize(this.canvas, this.canvasCtx, true);
+      this.canvasService.changeFormat();
     });
 
     this.headerService.listenClear.subscribe(_ => {
-      this.canvasService.clear(this.canvas, this.canvasCtx);
+      this.canvasService.clear();
     });
 
     this.headerService.listenFullScreen.subscribe(_ => {
       this.isFullScreen = true;
-      this.canvasService.resize(this.canvas, this.canvasCtx);
+      this.canvasService.resize();
     });
   }
 
   isFullScreen = false;
 
-  _canvasCtx: CanvasRenderingContext2D | undefined;
-
-  public get canvas(): HTMLCanvasElement {
-    if (!this._canvas) throw new Error('Canvas Element is not defined');
-    return this._canvas.nativeElement as HTMLCanvasElement;
-  }
-
-  public get canvasCtx(): CanvasRenderingContext2D {
-    if (!this._canvasCtx) throw new Error('Canvas Context is not defined');
-    return this._canvasCtx;
-  }
-
   ngAfterViewInit(): void {
-    this._canvasCtx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
-    this.canvasService.resize(this.canvas, this.canvasCtx);
+    if (!this._canvas) throw new Error('Canvas Element is not defined');
+    this.canvasService.canvas = this._canvas.nativeElement as HTMLCanvasElement;
+    this.canvasService.canvasCtx = this.canvasService.canvas.getContext(
+      '2d'
+    ) as CanvasRenderingContext2D;
 
-    const mousedrag$ = this.mouseEventService.mousedrag$(this.canvas);
+    this.canvasService.resize();
+
+    const mousedrag$ = this.mouseEventService.mousedrag$(
+      this.canvasService.canvas
+    );
     mousedrag$.subscribe(coords => {
-      this.canvasCtx.strokeStyle = this.drawingDataService.getColor();
-      this.canvasCtx.lineWidth = this.drawingDataService.getLineWidth();
-      this.canvasCtx.beginPath();
-      this.canvasCtx.moveTo(coords.x1, coords.y1);
-      this.canvasCtx.lineTo(coords.x2, coords.y2);
-      this.canvasCtx.stroke();
+      this.canvasService.canvasCtx.strokeStyle =
+        this.drawingDataService.getColor();
+      this.canvasService.canvasCtx.lineWidth =
+        this.drawingDataService.getLineWidth();
+      this.canvasService.canvasCtx.beginPath();
+      this.canvasService.canvasCtx.moveTo(coords.x1, coords.y1);
+      this.canvasService.canvasCtx.lineTo(coords.x2, coords.y2);
+      this.canvasService.canvasCtx.stroke();
     });
   }
 
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.canvasService.resize(this.canvas, this.canvasCtx);
+    this.canvasService.resize();
   }
 
   @HostListener('mousedown', ['$event.target'])
   onClick() {
     this.isFullScreen = false;
-    this.canvasService.resize(this.canvas, this.canvasCtx);
+    this.canvasService.resize();
   }
 }
