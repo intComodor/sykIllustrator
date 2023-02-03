@@ -7,8 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CanvasService } from 'src/app/services/canvas.service';
-import { DrawingDataService } from 'src/app/services/drawing-data.service';
-import { MouseEventService } from 'src/app/services/mouse-event.service';
+import { ToolsService } from 'src/app/services/tools.service';
 
 @Component({
   selector: 'app-drawing-board',
@@ -18,11 +17,12 @@ import { MouseEventService } from 'src/app/services/mouse-event.service';
 export class DrawingBoardComponent implements AfterViewInit {
   @ViewChild('board', { static: true }) _canvas: ElementRef | undefined;
 
+  isFullScreen = false;
+
   constructor(
     private headerService: HeaderService,
-    private drawingDataService: DrawingDataService,
-    private mouseEventService: MouseEventService,
-    private canvasService: CanvasService
+    private canvasService: CanvasService,
+    private toolsService: ToolsService
   ) {
     this.headerService.listenFormat.subscribe(_ => {
       this.canvasService.changeFormat();
@@ -38,9 +38,16 @@ export class DrawingBoardComponent implements AfterViewInit {
     });
   }
 
-  isFullScreen = false;
-
   ngAfterViewInit(): void {
+    this.initCanvas();
+    this.toolsService.tool.initTool();
+  }
+
+  changeTool() {
+    this.toolsService.changeTool();
+  }
+
+  initCanvas() {
     if (!this._canvas) throw new Error('Canvas Element is not defined');
     this.canvasService.canvas = this._canvas.nativeElement as HTMLCanvasElement;
     this.canvasService.canvasCtx = this.canvasService.canvas.getContext(
@@ -48,20 +55,6 @@ export class DrawingBoardComponent implements AfterViewInit {
     ) as CanvasRenderingContext2D;
 
     this.canvasService.resize();
-
-    const mousedrag$ = this.mouseEventService.mousedrag$(
-      this.canvasService.canvas
-    );
-    mousedrag$.subscribe(coords => {
-      this.canvasService.canvasCtx.strokeStyle =
-        this.drawingDataService.getColor();
-      this.canvasService.canvasCtx.lineWidth =
-        this.drawingDataService.getLineWidth();
-      this.canvasService.canvasCtx.beginPath();
-      this.canvasService.canvasCtx.moveTo(coords.x1, coords.y1);
-      this.canvasService.canvasCtx.lineTo(coords.x2, coords.y2);
-      this.canvasService.canvasCtx.stroke();
-    });
   }
 
   @HostListener('window:resize', ['$event'])
