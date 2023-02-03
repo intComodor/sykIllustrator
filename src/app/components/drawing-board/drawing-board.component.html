@@ -1,8 +1,0 @@
-<canvas #board [ngClass]="{ full: isFullScreen() }" id="board" class="board">
-</canvas>
-
-<div
-  [ngClass]="{ back: isFullScreen() }"
-  [style.display]="isFullScreen() ? 'block' : 'none'"></div>
-
-<button (click)="changeTool()"></button>
