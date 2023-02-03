@@ -7,8 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CanvasService } from 'src/app/services/canvas.service';
-import { DrawingDataService } from 'src/app/services/drawing-data.service';
-import { MouseEventService } from 'src/app/services/mouse-event.service';
+import { ToolsService } from 'src/app/services/tools.service';
 
 @Component({
   selector: 'app-drawing-board',
@@ -18,63 +17,54 @@ import { MouseEventService } from 'src/app/services/mouse-event.service';
 export class DrawingBoardComponent implements AfterViewInit {
   @ViewChild('board', { static: true }) _canvas: ElementRef | undefined;
 
+  isFullScreen = false;
+
   constructor(
     private headerService: HeaderService,
-    private drawingDataService: DrawingDataService,
-    private mouseEventService: MouseEventService,
-    private canvasService: CanvasService
+    private canvasService: CanvasService,
+    private toolsService: ToolsService
   ) {
     this.headerService.listenFormat.subscribe(_ => {
-      this.canvasService.resize(this.canvas, this.canvasCtx, true);
+      this.canvasService.changeFormat();
     });
 
     this.headerService.listenClear.subscribe(_ => {
-      this.canvasService.clear(this.canvas, this.canvasCtx);
+      this.canvasService.clear();
     });
 
     this.headerService.listenFullScreen.subscribe(_ => {
       this.isFullScreen = true;
-      this.canvasService.resize(this.canvas, this.canvasCtx);
+      this.canvasService.resize();
     });
-  }
-
-  isFullScreen = false;
-
-  _canvasCtx: CanvasRenderingContext2D | undefined;
-
-  public get canvas(): HTMLCanvasElement {
-    if (!this._canvas) throw new Error('Canvas Element is not defined');
-    return this._canvas.nativeElement as HTMLCanvasElement;
-  }
-
-  public get canvasCtx(): CanvasRenderingContext2D {
-    if (!this._canvasCtx) throw new Error('Canvas Context is not defined');
-    return this._canvasCtx;
   }
 
   ngAfterViewInit(): void {
-    this._canvasCtx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
-    this.canvasService.resize(this.canvas, this.canvasCtx);
+    this.initCanvas();
+    this.toolsService.tool.initTool();
+  }
 
-    const mousedrag$ = this.mouseEventService.mousedrag$(this.canvas);
-    mousedrag$.subscribe(coords => {
-      this.canvasCtx.strokeStyle = this.drawingDataService.getColor();
-      this.canvasCtx.lineWidth = this.drawingDataService.getLineWidth();
-      this.canvasCtx.beginPath();
-      this.canvasCtx.moveTo(coords.x1, coords.y1);
-      this.canvasCtx.lineTo(coords.x2, coords.y2);
-      this.canvasCtx.stroke();
-    });
+  changeTool() {
+    this.toolsService.changeTool();
+  }
+
+  initCanvas() {
+    if (!this._canvas) throw new Error('Canvas Element is not defined');
+    this.canvasService.canvas = this._canvas.nativeElement as HTMLCanvasElement;
+    this.canvasService.canvasCtx = this.canvasService.canvas.getContext(
+      '2d'
+    ) as CanvasRenderingContext2D;
+
+    this.canvasService.resize();
   }
 
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.canvasService.resize(this.canvas, this.canvasCtx);
+    this.canvasService.resize();
   }
 
   @HostListener('mousedown', ['$event.target'])
   onClick() {
     this.isFullScreen = false;
-    this.canvasService.resize(this.canvas, this.canvasCtx);
+    this.canvasService.resize();
   }
 }
