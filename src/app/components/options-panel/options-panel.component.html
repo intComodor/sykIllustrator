@@ -1,3 +1,26 @@
-<div>
-</div>
+<div class="option-panel">
+  <ng-container *ngFor="let color of colors">
+    <div
+      class="color-box"
+      (click)="setColor(color)"
+      [ngStyle]="
+        color === currentColor() ? { border: '#323232 solid 1px' } : {}
+      ">
+      <div
+        class="color-box-inner"
+        [ngStyle]="{ 'background-color': color }"></div>
+    </div>
+  </ng-container>
 
+  <div>
+    <input
+      style="width: 105px; color: red"
+      class="slider-line-width"
+      type="range"
+      min="1"
+      max="50"
+      step="1"
+      [(ngModel)]="lineWidth"
+      (ngModelChange)="setLineWidth(lineWidth)" />
+  </div>
+</div>
