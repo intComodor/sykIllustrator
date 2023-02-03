@@ -1,4 +1,3 @@
-import { HeaderService } from 'src/app/services/header.service';
 import {
   AfterViewInit,
   Component,
@@ -17,26 +16,14 @@ import { ToolsService } from 'src/app/services/tools.service';
 export class DrawingBoardComponent implements AfterViewInit {
   @ViewChild('board', { static: true }) _canvas: ElementRef | undefined;
 
-  isFullScreen = false;
+  isFullScreen(): boolean {
+    return this.canvasService.isFullScreen;
+  }
 
   constructor(
-    private headerService: HeaderService,
     private canvasService: CanvasService,
     private toolsService: ToolsService
-  ) {
-    this.headerService.listenFormat.subscribe(_ => {
-      this.canvasService.changeFormat();
-    });
-
-    this.headerService.listenClear.subscribe(_ => {
-      this.canvasService.clear();
-    });
-
-    this.headerService.listenFullScreen.subscribe(_ => {
-      this.isFullScreen = true;
-      this.canvasService.resize();
-    });
-  }
+  ) {}
 
   ngAfterViewInit(): void {
     this.initCanvas();
@@ -64,7 +51,6 @@ export class DrawingBoardComponent implements AfterViewInit {
 
   @HostListener('mousedown', ['$event.target'])
   onClick() {
-    this.isFullScreen = false;
-    this.canvasService.resize();
+    this.canvasService.setFullScreen(false);
   }
 }

@@ -1,48 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import html2canvas from 'html2canvas';
-import { HeaderService } from 'src/app/services/header.service';
+import { CanvasService } from 'src/app/services/canvas.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-
-  constructor(private data: HeaderService) { 
-    
-  }
+  constructor(private canvasService: CanvasService) {}
 
   filename = new FormControl('');
 
   onSave() {
-    let element = document.getElementById("board") as HTMLElement;
+    const canvas = this.canvasService.canvas;
 
-    html2canvas(element).then((canvas) => {
-        // Convert the canvas to blob
-        canvas.title = (this.filename.value || 'untitled') + ".png";
-        canvas.toBlob(function(blob: any) {
-            // To download directly on browser default 'downloads' location
-            let link = document.createElement("a");
-            link.download = canvas.title;
-            link.href = URL.createObjectURL(blob);
-            link.click();
-
-        }, 'image/png');
+    html2canvas(canvas).then(canvas => {
+      // Convert the canvas to blob
+      canvas.title = (this.filename.value || 'untitled') + '.png';
+      canvas.toBlob((blob: Blob | null) => {
+        if (!blob) throw new Error('Blob is not defined');
+        const link = document.createElement('a');
+        link.download = canvas.title;
+        link.href = URL.createObjectURL(blob);
+        link.click();
+      }, 'image/png');
     });
   }
 
   onChangeFormat() {
-    this.data.changeFormat();
+    this.canvasService.changeFormat();
   }
 
   onClear() {
-    this.data.clear();
+    this.canvasService.clear();
   }
 
   onFullScreen() {
-    this.data.setFullScreen();
+    this.canvasService.setFullScreen(true);
   }
-
 }
