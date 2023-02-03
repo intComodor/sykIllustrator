@@ -14,6 +14,21 @@ export class CanvasService {
   public canvas!: HTMLCanvasElement;
   public canvasCtx!: CanvasRenderingContext2D;
 
+  isFullScreen = false;
+
+  setFullScreen(value: boolean) {
+    this.isFullScreen = value;
+    this.resize();
+  }
+
+  changeFormat() {
+    this.indexFormatBoard =
+      (this.indexFormatBoard + 1) % this.formatsBoard.length;
+    this.format = this.formatsBoard[this.indexFormatBoard];
+
+    this.resize();
+  }
+
   resize() {
     if (!this.canvas || !this.canvasCtx) {
       throw new Error('Canvas || canvasCtx is not defined');
@@ -33,7 +48,8 @@ export class CanvasService {
     // Resize the canvas
     if (
       window.innerWidth < this.minWidth ||
-      window.innerHeight < this.minHeight
+      window.innerHeight < this.minHeight ||
+      this.isFullScreen
     ) {
       this.canvas.width = window.innerWidth;
       this.canvas.height = window.innerHeight;
@@ -61,14 +77,6 @@ export class CanvasService {
       this.canvas.width,
       this.canvas.height
     );
-  }
-
-  changeFormat() {
-    this.indexFormatBoard =
-      (this.indexFormatBoard + 1) % this.formatsBoard.length;
-    this.format = this.formatsBoard[this.indexFormatBoard];
-
-    this.resize();
   }
 
   clear() {

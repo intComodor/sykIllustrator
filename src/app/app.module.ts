@@ -6,8 +6,7 @@ import { DrawingBoardComponent } from './components/drawing-board/drawing-board.
 import { ToolsPanelComponent } from './components/tools-panel/tools-panel.component';
 import { OptionsPanelComponent } from './components/options-panel/options-panel.component';
 import { HeaderComponent } from './components/header/header.component';
-import { HeaderService } from './services/header.service';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DrawingDataService } from './services/drawing-data.service';
 import { MouseEventService } from './services/mouse-event.service';
 
@@ -19,16 +18,8 @@ import { MouseEventService } from './services/mouse-event.service';
     OptionsPanelComponent,
     HeaderComponent,
   ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    FormsModule
-  ],
-  providers: [
-    DrawingDataService,
-    HeaderService,
-    MouseEventService
-  ],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, ReactiveFormsModule, FormsModule],
+  providers: [DrawingDataService, MouseEventService],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
