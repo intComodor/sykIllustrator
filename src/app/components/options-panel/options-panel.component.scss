@@ -1,45 +1,74 @@
+@import '../../../styles.scss';
+
 .option-panel {
-  background-color: #424242;
+  background-color: var(--grey3);
   height: 100%;
-  border-radius: 10px;
+  border-radius: 1px;
   -webkit-box-shadow: 0px 0px 9px 1px #000000;
   box-shadow: 0px 0px 9px 1px #000000;
-
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  width: 110px;
+  width: 100px;
   height: 270px;
   max-width: 110px;
   max-height: 290px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
   padding-top: 15px;
   padding-bottom: 15px;
-  align-content: flex-start;
 }
 
-.color-box {
-  height: 33px;
-  width: 33px;
-  background-color: #424242;
-  -webkit-box-shadow: 0px 0px 17px -8px #151414;
-  box-shadow: 0px 0px 17px -8px #151414;
-  // border: #323232 solid 0.5px;
-  border-radius: 5px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.title-section {
+  color: var(--grey6);
+  font-family: var(--font-family);
+  font-size: var(--font-size1);
+  margin-bottom: 8px;
 }
 
-.color-box:hover {
-  cursor: pointer;
-  border: #323232 solid 0.5px;
+.title-section:not(:first-child) {
+  margin-top: 10px;
+}
+
+.list-colors {
+  overflow-x: auto;
+  white-space: nowrap;
+  align-items: baseline;
+  justify-content: baseline;
 }
 
 .color-box-inner {
-  height: 25px;
-  width: 25px;
-  border-radius: 50px;
+  height: 19px;
+  width: 19px;
+  display: inline-block;
+}
+
+.color-box-inner:not(:last-child) {
+  margin-right: 4px;
+}
+
+.color-box-inner:hover {
+  cursor: pointer;
+  scale: 1.1;
+}
+
+.color-selected {
+  border: var(--grey2) solid 2px;
+  margin-bottom: -2px;
+  margin-up: 2px;
+}
+
+.block-width {
+  width: 88px;
+  height: 27px;
+  background-color: var(--grey2);
+  border-radius: 2px;
+  padding-left: 12px;
+  // justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.filling-txt {
+  margin-left: 5px;
+  color: var(--grey6);
+  font-family: var(--font-family);
+  font-size: var(--font-size2);
 }

@@ -6,7 +6,7 @@
 
 span {
   color: white;
-  border: #525252 1px dotted;
+  border: var(--grey4) 1px dotted;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,7 +24,7 @@ span:hover {
 input {
   color: white;
   background-color: #212121;
-  border: #525252 1px dotted;
+  border: var(--grey4) 1px dotted;
   outline: none;
   font-size: 2rem;
   font-weight: bold;
