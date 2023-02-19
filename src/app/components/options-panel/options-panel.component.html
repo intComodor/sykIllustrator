@@ -1,26 +1,32 @@
 <div class="option-panel">
-  <ng-container *ngFor="let color of colors">
-    <div
-      class="color-box"
-      (click)="setColor(color)"
-      [ngStyle]="
-        color === currentColor() ? { border: '#323232 solid 1px' } : {}
-      ">
+  <div class="title-section">COLORS</div>
+  <div class="list-colors">
+    <ng-container *ngFor="let color of colors">
       <div
+        [class.color-selected]="color === currentColor()"
+        (click)="setColor(color)"
         class="color-box-inner"
         [ngStyle]="{ 'background-color': color }"></div>
-    </div>
-  </ng-container>
-
-  <div>
+    </ng-container>
+  </div>
+  <div class="title-section">LINE WIDTH</div>
+  <div class="block-width">
     <input
-      style="width: 105px; color: red"
+      style="width: 75px"
       class="slider-line-width"
       type="range"
-      min="1"
-      max="50"
+      min="2"
+      max="30"
       step="1"
       [(ngModel)]="lineWidth"
       (ngModelChange)="setLineWidth(lineWidth)" />
+  </div>
+  <div class="title-section">FILLING</div>
+  <div class="block-width">
+    <input
+      type="checkbox"
+      [(ngModel)]="filling"
+      (ngModelChange)="setFilling(filling)" />
+    <span class="filling-txt">{{ filling ? 'FILLED' : 'EMPTY' }}</span>
   </div>
 </div>
