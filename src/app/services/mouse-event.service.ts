@@ -1,5 +1,13 @@
 import { Injectable } from '@angular/core';
-import { fromEvent, mergeMap, Observable, scan, share, takeUntil } from 'rxjs';
+import {
+  fromEvent,
+  merge,
+  mergeMap,
+  Observable,
+  scan,
+  share,
+  takeUntil,
+} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +35,7 @@ export class MouseEventService {
     return this.mousedown$(canvas).pipe(
       mergeMap(downEvent =>
         this.mousemove$(canvas).pipe(
-          takeUntil(this.mouseup$),
+          takeUntil(merge(this.mouseup$, fromEvent(canvas, 'mouseleave'))),
           scan(
             (lastPosition, moveEvent) => ({
               x1: lastPosition.x2,
