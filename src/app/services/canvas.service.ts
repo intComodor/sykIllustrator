@@ -80,6 +80,8 @@ export class CanvasService {
   }
 
   clear() {
-    this.canvasCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    if (confirm('Are you sure to clear the canvas')) {
+      this.canvasCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
   }
 }
