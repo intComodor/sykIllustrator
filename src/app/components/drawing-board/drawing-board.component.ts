@@ -30,10 +30,6 @@ export class DrawingBoardComponent implements AfterViewInit {
     this.toolsService.tool.initTool();
   }
 
-  changeTool() {
-    this.toolsService.changeTool();
-  }
-
   initCanvas() {
     if (!this._canvas) throw new Error('Canvas Element is not defined');
     this.canvasService.canvas = this._canvas.nativeElement as HTMLCanvasElement;

@@ -15,12 +15,6 @@ export class Pencil extends Tool {
     );
   }
 
-  // disableTool(): void {
-  //   if (!this.mouseDragSubscription)
-  //     throw new Error('No subscription yet in pencil');
-  //   this.mouseDragSubscription.unsubscribe();
-  // }
-
   draw({ x1, y1, x2, y2 }: { x1: number; y1: number; x2: number; y2: number }) {
     this.canvasService.canvasCtx.strokeStyle =
       this.drawingDataService.getColor();
