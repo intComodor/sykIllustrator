@@ -10,8 +10,6 @@ export class Line extends Tool {
   initTool(): void {
     let startX = 0;
     let startY = 0;
-    let endX = 0;
-    let endY = 0;
     this.mouseEventService
       .mousedown$(this.canvasService.canvas)
       .subscribe(event => {
@@ -19,28 +17,18 @@ export class Line extends Tool {
         startX = event.offsetX;
         startY = event.offsetY;
       });
-    this.mouseEventService
-      .mousemove$(this.canvasService.canvas)
-      .subscribe(event => {
-        if (this.isDrawing) {
-          endX = event.offsetX;
-          endY = event.offsetY;
-          //this.draw({
-          // x1: startX,
-          // y1: startY,
-          // x2: event.offsetX,
-          // y2: event.offsetY,
-          //});
-        }
-      });
-    this.mouseEventService.mouseup$.subscribe(() => {
+    this.mouseEventService.mouseup$.subscribe(event => {
+      if (this.isDrawing) {
+        this.draw({
+          x1: startX,
+          y1: startY,
+          x2: event.offsetX,
+          y2: event.offsetY,
+        });
+        startX = event.offsetX;
+        startY = event.offsetY;
+      }
       this.isDrawing = false;
-      this.draw({
-        x1: startX,
-        y1: startY,
-        x2: endX,
-        y2: endY,
-      });
     });
   }
 
@@ -56,6 +44,10 @@ export class Line extends Tool {
     y2: number;
   }): void {
     const ctx = this.canvasService.canvasCtx;
+    this.canvasService.canvasCtx.strokeStyle =
+      this.drawingDataService.getColor();
+    this.canvasService.canvasCtx.lineWidth =
+      this.drawingDataService.getLineWidth();
     ctx.beginPath();
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
