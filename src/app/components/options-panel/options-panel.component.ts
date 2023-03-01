@@ -9,10 +9,10 @@ import { DrawingDataService } from 'src/app/services/drawing-data.service';
 export class OptionsPanelComponent {
   constructor(private drawingDataService: DrawingDataService) {}
   lineWidth = this.drawingDataService.getLineWidth();
-  filling = true;
+  filling = this.drawingDataService.isFill();
 
   setFilling(value: boolean) {
-    this.filling = value;
+    this.drawingDataService.setFill(value);
   }
 
   colors: string[] = [

@@ -10,7 +10,7 @@ export abstract class Tool {
   canvasService: CanvasService;
   mouseEventService: MouseEventService;
   drawingDataService: DrawingDataService;
-  mouseDragSubscription: Subscription | undefined;
+  eventsSubscription: Subscription[] = [];
 
   constructor(name: string, icon: string) {
     this.name = name;
@@ -35,5 +35,7 @@ export abstract class Tool {
     y2: number;
   }): void;
 
-  abstract disableTool(): void;
+  disableTool(): void {
+    this.eventsSubscription.forEach(subscription => subscription.unsubscribe());
+  }
 }

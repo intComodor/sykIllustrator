@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Tool } from 'src/app/types/tool';
 import { Pencil } from 'src/app/types/pencil';
-import { SquareForm } from 'src/app/types/square-form';
+import { RectForm } from 'src/app/types/rect-form';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToolsService {
-  tools: Tool[] = [new Pencil(), new SquareForm()];
+  tools: Tool[] = [new Pencil(), new RectForm()];
   indexTool = 0;
   currentTool: Tool = this.tools[this.indexTool];
 
