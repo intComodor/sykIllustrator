@@ -6,18 +6,20 @@ export class Pencil extends Tool {
   }
 
   initTool(): void {
-    this.mouseDragSubscription = this.mouseEventService
-      .mousedrag$(this.canvasService.canvas)
-      .subscribe(coords => {
-        this.draw(coords);
-      });
+    this.eventsSubscription.push(
+      this.mouseEventService
+        .mousedrag$(this.canvasService.canvas)
+        .subscribe(coords => {
+          this.draw(coords);
+        })
+    );
   }
 
-  disableTool(): void {
-    if (!this.mouseDragSubscription)
-      throw new Error('No subscription yet in pencil');
-    this.mouseDragSubscription.unsubscribe();
-  }
+  // disableTool(): void {
+  //   if (!this.mouseDragSubscription)
+  //     throw new Error('No subscription yet in pencil');
+  //   this.mouseDragSubscription.unsubscribe();
+  // }
 
   draw({ x1, y1, x2, y2 }: { x1: number; y1: number; x2: number; y2: number }) {
     this.canvasService.canvasCtx.strokeStyle =

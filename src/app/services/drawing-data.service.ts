@@ -7,6 +7,7 @@ export class DrawingDataService {
   private color = 'red';
   private lineWidth = 2;
   private isDrawing = false;
+  private fill = false;
 
   getColor(): string {
     return this.color;
@@ -30,5 +31,13 @@ export class DrawingDataService {
 
   setIsDrawing(isDrawing: boolean): void {
     this.isDrawing = isDrawing;
+  }
+
+  isFill(): boolean {
+    return this.fill;
+  }
+
+  setFill(fill: boolean): void {
+    this.fill = fill;
   }
 }
