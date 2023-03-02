@@ -1,8 +1,6 @@
 import { Tool } from './tool';
 
 export class Line extends Tool {
-  private isDrawing = false;
-
   constructor() {
     super('Line', 'line.svg');
   }
@@ -10,26 +8,36 @@ export class Line extends Tool {
   initTool(): void {
     let startX = 0;
     let startY = 0;
-    this.mouseEventService
-      .mousedown$(this.canvasService.canvas)
-      .subscribe(event => {
-        this.isDrawing = true;
-        startX = event.offsetX;
-        startY = event.offsetY;
-      });
-    this.mouseEventService.mouseup$.subscribe(event => {
-      if (this.isDrawing) {
-        this.draw({
-          x1: startX,
-          y1: startY,
-          x2: event.offsetX,
-          y2: event.offsetY,
-        });
-        startX = event.offsetX;
-        startY = event.offsetY;
-      }
-      this.isDrawing = false;
-    });
+
+    this.eventsSubscription.push(
+      this.mouseEventService
+        .mousedown$(this.canvasService.canvas)
+        .subscribe(event => {
+          startX = event.offsetX;
+          startY = event.offsetY;
+        })
+    );
+
+    this.eventsSubscription.push(
+      this.mouseEventService.mouseup$.subscribe(event => {
+        const canvasRect = this.canvasService.canvas.getBoundingClientRect();
+        const x = event.clientX - canvasRect.left;
+        const y = event.clientY - canvasRect.top;
+
+        if (
+          x >= 0 &&
+          x < this.canvasService.canvas.width &&
+          y >= 0 &&
+          y < this.canvasService.canvas.height
+        )
+          this.draw({
+            x1: startX,
+            y1: startY,
+            x2: event.offsetX,
+            y2: event.offsetY,
+          });
+      })
+    );
   }
 
   draw({
@@ -52,9 +60,5 @@ export class Line extends Tool {
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
     ctx.stroke();
-  }
-
-  disableTool(): void {
-    this.isDrawing = false;
   }
 }
