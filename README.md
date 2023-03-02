@@ -1,27 +1,57 @@
+<img align="left" width="65" height="65" src="https://user-images.githubusercontent.com/75556267/222464988-64fdab41-4078-4348-a0e0-7eddcc9f5799.png" alt="Resume application project app icon">
+
 # SykIllustrator
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.9.
+This web app just allows you to create a drawing with different tools, options in different formats and save it !
 
-## Development server
+<p align="center"><img src="https://via.placeholder.com/468x300?text=App+Screenshot+Here"/></p>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+<p align="center">visit on <a href="https://intcomodor.github.io/syk-illustrator/">https://intcomodor.github.io/syk-illustrator/</a></p>
 
-## Code scaffolding
+## 👀 Features
+- Draw with different tools: `pencil`, `segment` and `rectangle shape`.
+- Different options for a tool: `line width`, `color` and `fill a shape or not`.
+- Choose different canvas format: `16/9`, `4/3`, `1/1`, `21/9` and `32/9`.
+- Clear the canvas.
+- Save the canvas in `png`.
+- Full screen mode.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## 🛠️ Tech Stack
+<div align="center">
+<div style="display:flex; flex-direction: row; justify-content: center; align-items: center; gap: 5px; margin-bottom: 5px">
+<img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white"/>
+<img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white"/>
+</div>
+<div style="display:flex; flex-direction: row; justify-content: center; align-items: center; gap: 5px; margin-bottom: 15px">
+<img src="https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white"/>
+<img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white"/>
+<img src="https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white"/>
+</div>
+</div>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+>⚙️ Angular CLI version 14.2.9
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🧑🏻‍💻 Run locally
+>⚠️ be sure to have Angular CLI 14 or higher installed locally
 
-## Running end-to-end tests
+install dependencies
+```bash
+npm install
+```
+build and launch the web app
+```bash
+ng serve
+```
+🪄 and visit [http://localhost:4200](http://localhost:4200)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+        
 
-## Further help
+## 🙇 Authors
+<p align="center">
+<a href="https://github.com/intComodor/Python/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=intComodor/sykIllustrator"/>
+</a>
+</p>
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
