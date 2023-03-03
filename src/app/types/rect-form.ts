@@ -24,6 +24,7 @@ export class RectForm extends Tool {
         const x = event.clientX - canvasRect.left;
         const y = event.clientY - canvasRect.top;
 
+        // Check if the mouse is still on the canvas before drawing
         if (
           x >= 0 &&
           x < this.canvasService.canvas.width &&

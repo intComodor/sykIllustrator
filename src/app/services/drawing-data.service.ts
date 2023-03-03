@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 
+/**
+ * Drawing data service.
+ * This service contains the options values of the tools.
+ */
 @Injectable({
   providedIn: 'root',
 })

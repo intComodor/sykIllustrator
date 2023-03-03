@@ -1,24 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import html2canvas from 'html2canvas';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-
-
-
-  ngOnInit(): void {
-
-  }
-
+export class AppComponent {
   title = 'syk-illustrator';
-
-
-
-
-
 }
-
