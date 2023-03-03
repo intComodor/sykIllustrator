@@ -13,14 +13,14 @@ import { Line } from '../types/line';
 })
 export class ToolsService {
   /** Map of available tools */
-  tools: Map<string, Tool> = new Map<string, Tool>([
+  private tools: Map<string, Tool> = new Map<string, Tool>([
     ['Line', new Line()],
     ['Pencil', new Pencil()],
     ['RectForm', new RectForm()],
   ]);
 
-  defaultTool = 'Pencil';
-  currentTool: Tool | undefined = this.tools.get(this.defaultTool);
+  private defaultTool = 'Pencil';
+  private currentTool: Tool | undefined = this.tools.get(this.defaultTool);
 
   /**
    * Change the current tool.

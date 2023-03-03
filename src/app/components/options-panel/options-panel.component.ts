@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DrawingDataService } from 'src/app/services/drawing-data.service';
+import { ToolsService } from 'src/app/services/tools.service';
 
 /**
  * Options panel component.
@@ -11,7 +12,10 @@ import { DrawingDataService } from 'src/app/services/drawing-data.service';
   styleUrls: ['./options-panel.component.scss'],
 })
 export class OptionsPanelComponent {
-  constructor(private drawingDataService: DrawingDataService) {}
+  constructor(
+    private drawingDataService: DrawingDataService,
+    private toolsService: ToolsService
+  ) {}
 
   /** Get the current line width with the drawing data service */
   lineWidth = this.drawingDataService.getLineWidth();
@@ -44,5 +48,9 @@ export class OptionsPanelComponent {
 
   setLineWidth(width: number) {
     this.drawingDataService.setLineWidth(width);
+  }
+
+  currentTool(): string {
+    return this.toolsService.tool.name;
   }
 }
