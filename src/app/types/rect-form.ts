@@ -2,7 +2,7 @@ import { Tool } from './tool';
 
 export class RectForm extends Tool {
   constructor() {
-    super('square', 'black');
+    super('RectForm', 'black');
   }
 
   initTool(): void {
