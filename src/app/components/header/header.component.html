@@ -1,7 +1,21 @@
 <div id="title">
-  <span class="material-icons" (click)="onFullScreen()">fit_screen</span>
-  <span class="material-icons" (click)="onChangeFormat()">view_quilt</span>
-  <span class="material-icons" (click)="onClear()">close</span>
+  <span (click)="onFullScreen()">
+    <img
+      src="../../../assets/header/fullscreen.svg"
+      alt="icon for fullscreen mode" />
+  </span>
+  <span (click)="onChangeFormat()">
+    <img
+      src="../../../assets/header/formats.svg"
+      alt="icon for change format" />
+  </span>
+  <span (click)="onClear()">
+    <img
+      src="../../../assets/header/clear.svg"
+      alt="icon for clear the canvas" />
+  </span>
   <input type="text" placeholder="Untitled" [formControl]="filename" />
-  <span class="material-icons" (click)="onSave()">save</span>
+  <span (click)="onSave()">
+    <img src="../../../assets/header/save.svg" alt="icon for save the canvas" />
+  </span>
 </div>
