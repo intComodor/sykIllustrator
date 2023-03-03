@@ -16,6 +16,12 @@ span {
   cursor: pointer;
 }
 
+span img {
+  filter: invert(1);
+  width: 28px;
+  height: 28px;
+}
+
 span:hover {
   transform: scale(1.05);
   transition: 0.2s;
