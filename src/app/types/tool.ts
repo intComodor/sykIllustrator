@@ -10,6 +10,8 @@ export abstract class Tool {
   canvasService: CanvasService;
   mouseEventService: MouseEventService;
   drawingDataService: DrawingDataService;
+
+  /** List of events subscriptions of the tool to define her behavior. */
   eventsSubscription: Subscription[] = [];
 
   constructor(name: string, icon: string) {
@@ -21,6 +23,10 @@ export abstract class Tool {
     this.drawingDataService = inject(DrawingDataService);
   }
 
+  /**
+   * Initialisation of the tool by subscribing to events and defining her behavior.
+   * Each subscription is added to the eventsSubscription list.
+   */
   abstract initTool(): void;
 
   abstract draw({
@@ -35,6 +41,7 @@ export abstract class Tool {
     y2: number;
   }): void;
 
+  /** Disable the tool by unsubscribing from all events. */
   disableTool(): void {
     this.eventsSubscription.forEach(subscription => subscription.unsubscribe());
   }

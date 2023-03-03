@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ToolsService } from 'src/app/services/tools.service';
 
+/**
+ * Tools panel component.
+ * This component contains the logic of changing the tools.
+ */
 @Component({
   selector: 'app-tools-panel',
   templateUrl: './tools-panel.component.html',
