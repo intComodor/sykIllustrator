@@ -23,8 +23,8 @@
       (ngModelChange)="setLineWidth(lineWidth)" />
   </div>
 
-  <div class="title-section">FILLING</div>
-  <div class="block-filling">
+  <div class="title-section" *ngIf="currentTool() == 'RectForm'">FILLING</div>
+  <div class="block-filling" *ngIf="currentTool() == 'RectForm'">
     <input
       type="checkbox"
       [(ngModel)]="filling"
