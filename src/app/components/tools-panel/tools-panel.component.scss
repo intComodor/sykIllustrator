@@ -1,13 +1,85 @@
-div {
+@import '../../../styles.scss';
+
+#panel {
   background-color: #424242;
   height: 100%;
   border-radius: 1px;
   -webkit-box-shadow: 0px 0px 9px 1px #000000;
   box-shadow: 0px 0px 9px 1px #000000;
+
+  width: 100px;
+  height: 270px;
+  max-width: 110px;
+  max-height: 290px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.title-section {
+  color: var(--grey6);
+  font-family: var(--font-family);
+  font-size: var(--font-size1);
+  margin-bottom: 8px;
+}
+
+.title-section:not(:first-child) {
+  margin-top: 10px;
 }
 
 button {
   align-items: center;
   margin: 30px;
   width: 50px;
+}
+
+.box-tool,
+.box-shape {
+  background-color: var(--grey2);
+  // border: 1px solid #000;
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.block-width {
+  width: 88px;
+  height: 27px;
+  background-color: var(--grey2);
+  border-radius: 2px;
+  padding-left: 12px;
+  // justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.list-tools,
+.list-shapes {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.box-tool:first-child {
+  border: var(--grey1) solid 1px;
+  margin-top: -1px;
+}
+
+.box-tool:hover,
+.box-shape:hover {
+  cursor: pointer;
+  scale: 1.1;
+}
+
+.box-tool img,
+.box-shape img {
+  width: 20px;
+  height: 20px;
+  filter: invert(1);
 }

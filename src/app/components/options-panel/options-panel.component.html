@@ -9,6 +9,7 @@
         [ngStyle]="{ 'background-color': color }"></div>
     </ng-container>
   </div>
+
   <div class="title-section">LINE WIDTH</div>
   <div class="block-width">
     <input
@@ -21,8 +22,9 @@
       [(ngModel)]="lineWidth"
       (ngModelChange)="setLineWidth(lineWidth)" />
   </div>
+
   <div class="title-section">FILLING</div>
-  <div class="block-width">
+  <div class="block-filling">
     <input
       type="checkbox"
       [(ngModel)]="filling"
