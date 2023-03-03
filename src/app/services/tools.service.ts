@@ -12,24 +12,32 @@ import { Line } from '../types/line';
   providedIn: 'root',
 })
 export class ToolsService {
-  /** List of available tools */
-  tools: Tool[] = [new Line(), new Pencil(), new RectForm()];
+  /** Map of available tools */
+  tools: Map<string, Tool> = new Map<string, Tool>([
+    ['Line', new Line()],
+    ['Pencil', new Pencil()],
+    ['RectForm', new RectForm()],
+  ]);
 
-  indexTool = 0;
-  currentTool: Tool = this.tools[this.indexTool];
+  defaultTool = 'Pencil';
+  currentTool: Tool | undefined = this.tools.get(this.defaultTool);
 
   /**
    * Change the current tool.
    * Disable the current tool, calculate the next tool and enable it.
    */
-  changeTool() {
-    this.currentTool?.disableTool();
-    this.indexTool = (this.indexTool + 1) % this.tools.length;
-    this.currentTool = this.tools[this.indexTool];
+  changeTool(nextTool: string) {
+    if (!this.currentTool) throw new Error('No current tool');
+    this.currentTool.disableTool();
+
+    this.currentTool = this.tools.get(nextTool);
+
+    if (!this.currentTool) throw new Error('No current tool');
     this.currentTool.initTool();
   }
 
   get tool(): Tool {
+    if (!this.currentTool) throw new Error('No current tool');
     return this.currentTool;
   }
 }

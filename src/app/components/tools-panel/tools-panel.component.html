@@ -1,19 +1,26 @@
 <div id="panel">
-  <!-- <button (click)="changeTool()">change tool</button> -->
-
   <div class="title-section">TOOLS</div>
   <div class="list-tools">
-    <div class="box-tool">
+    <div
+      class="box-tool"
+      (click)="changeTool('Pencil')"
+      [class.tool-selected]="'Pencil' === currentTool()">
       <img src="../../../assets/tools/pencil.svg" alt="pencil tool" />
     </div>
-    <div class="box-tool">
+    <div
+      class="box-tool"
+      (click)="changeTool('Line')"
+      [class.tool-selected]="'Line' === currentTool()">
       <img src="../../../assets/tools/segment.svg" alt="segment tool" />
     </div>
   </div>
 
   <div class="title-section">SHAPES</div>
   <div class="list-shapes">
-    <div class="box-shape">
+    <div
+      class="box-shape"
+      (click)="changeTool('RectForm')"
+      [class.tool-selected]="'RectForm' === currentTool()">
       <img src="../../../assets/shapes/square.svg" alt="square shape" />
     </div>
   </div>

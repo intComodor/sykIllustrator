@@ -13,7 +13,11 @@ import { ToolsService } from 'src/app/services/tools.service';
 export class ToolsPanelComponent {
   constructor(private toolsService: ToolsService) {}
 
-  changeTool() {
-    this.toolsService.changeTool();
+  changeTool(nextTool: string) {
+    this.toolsService.changeTool(nextTool);
+  }
+
+  currentTool(): string {
+    return this.toolsService.tool.name;
   }
 }
