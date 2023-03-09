@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CanvasService } from 'src/app/services/canvas.service';
+import { DrawingDataService } from 'src/app/services/drawing-data.service';
 import { ToolsService } from 'src/app/services/tools.service';
 
 /**
@@ -30,7 +31,8 @@ export class DrawingBoardComponent implements AfterViewInit {
 
   constructor(
     private canvasService: CanvasService,
-    private toolsService: ToolsService
+    private toolsService: ToolsService,
+    private drawingDataService: DrawingDataService
   ) {}
 
   /**
@@ -39,6 +41,7 @@ export class DrawingBoardComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.initCanvas();
     this.toolsService.tool.initTool();
+    this.drawingDataService.initStates();
   }
 
   /**

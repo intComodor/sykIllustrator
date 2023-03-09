@@ -1,4 +1,10 @@
-<div id="title">
+<div id="header">
+  <span (click)="onUndo()">
+    <img src="../../../assets/header/undo.svg" alt="icon for undo action" />
+  </span>
+  <span (click)="onRedo()">
+    <img src="../../../assets/header/redo.svg" alt="icon for redo action" />
+  </span>
   <span (click)="onFullScreen()">
     <img
       src="../../../assets/header/fullscreen.svg"

@@ -51,16 +51,8 @@ export class CanvasService {
       throw new Error('Canvas || canvasCtx is not defined');
     }
 
-    // Create a temporary canvas to store the current canvas image
-    const inMemCanvas: HTMLCanvasElement = document.createElement('canvas');
-    const inMemCtx: CanvasRenderingContext2D = inMemCanvas.getContext(
-      '2d'
-    ) as CanvasRenderingContext2D;
-
-    // Store the current canvas image in the temporary canvas
-    inMemCanvas.width = this.canvas.offsetWidth;
-    inMemCanvas.height = this.canvas.offsetHeight;
-    inMemCtx.drawImage(this.canvas, 0, 0);
+    // Create a temporary canvas and store the current canvas image in it
+    const tmpCanvas: HTMLCanvasElement = this.createTmpCanvas();
 
     // Resize the canvas
     if (
@@ -88,7 +80,7 @@ export class CanvasService {
 
     // Restore the previous canvas image to the resized canvas
     this.canvasCtx.drawImage(
-      inMemCanvas,
+      tmpCanvas,
       0,
       0,
       this.canvas.width,
@@ -99,9 +91,40 @@ export class CanvasService {
   /**
    * Clear the canvas with a confirmation message.
    */
-  clear() {
-    if (confirm('Are you sure to clear the canvas')) {
+  clear(confirmation: 'withConfirmation' | 'withoutConfirmation') {
+    if (
+      confirmation === 'withConfirmation' &&
+      confirm('Are you sure to clear the canvas')
+    ) {
+      this.canvasCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    } else {
       this.canvasCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
+  }
+
+  /**
+   * Save the current canvas image in a temporary canvas.
+   */
+  createTmpCanvas(): HTMLCanvasElement {
+    const canvas = document.createElement('canvas');
+    canvas.width = this.canvas.width;
+    canvas.height = this.canvas.height;
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+    ctx.drawImage(this.canvas, 0, 0);
+    return canvas;
+  }
+
+  /**
+   * Replace the current canvas with the canvas passed in parameter.
+   */
+  drawCanvas(canvas: HTMLCanvasElement) {
+    this.clear('withoutConfirmation');
+    this.canvasCtx.drawImage(
+      canvas,
+      0,
+      0,
+      this.canvas.width,
+      this.canvas.height
+    );
   }
 }

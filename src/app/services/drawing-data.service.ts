@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CanvasService } from './canvas.service';
 
 /**
  * Drawing data service.
@@ -8,10 +9,67 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class DrawingDataService {
+  constructor(private canvasService: CanvasService) {}
+
   private color = 'red';
   private lineWidth = 2;
   private isDrawing = false;
   private fill = false;
+  states: HTMLCanvasElement[] = [];
+  indexState = 0;
+
+  initStates(): void {
+    this.states.push(this.canvasService.createTmpCanvas());
+    console.log('taille: ', this.states.length, 'index: ', this.indexState);
+  }
+
+  clearStates(): void {
+    this.states = [];
+    this.indexState = 0;
+    this.initStates();
+  }
+
+  pushState(): void {
+    while (this.indexState != this.states.length - 1) this.states.pop();
+
+    this.states.push(this.canvasService.createTmpCanvas());
+    this.indexState++;
+    console.log(
+      'push',
+      'taille:',
+      this.states.length,
+      'index:',
+      this.indexState
+    );
+  }
+
+  undo(): void {
+    if (this.indexState > 0) {
+      this.indexState--;
+      this.canvasService.drawCanvas(this.states[this.indexState]);
+    }
+    console.log(
+      'undo',
+      'taille:',
+      this.states.length,
+      'index:',
+      this.indexState
+    );
+  }
+
+  redo(): void {
+    if (this.indexState < this.states.length - 1) {
+      this.indexState++;
+      this.canvasService.drawCanvas(this.states[this.indexState]);
+    }
+    console.log(
+      'redo',
+      'taille:',
+      this.states.length,
+      'index:',
+      this.indexState
+    );
+  }
 
   getColor(): string {
     return this.color;

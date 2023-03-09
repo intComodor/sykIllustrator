@@ -1,7 +1,11 @@
-#title {
+#header {
   font-weight: bold;
   display: flex;
   justify-content: center;
+}
+
+span:nth-child(3) {
+  margin-left: 20px;
 }
 
 span {
