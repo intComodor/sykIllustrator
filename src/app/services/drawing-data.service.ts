@@ -20,7 +20,6 @@ export class DrawingDataService {
 
   initStates(): void {
     this.states.push(this.canvasService.createTmpCanvas());
-    console.log('taille: ', this.states.length, 'index: ', this.indexState);
   }
 
   clearStates(): void {
@@ -34,13 +33,6 @@ export class DrawingDataService {
 
     this.states.push(this.canvasService.createTmpCanvas());
     this.indexState++;
-    console.log(
-      'push',
-      'taille:',
-      this.states.length,
-      'index:',
-      this.indexState
-    );
   }
 
   undo(): void {
@@ -48,13 +40,6 @@ export class DrawingDataService {
       this.indexState--;
       this.canvasService.drawCanvas(this.states[this.indexState]);
     }
-    console.log(
-      'undo',
-      'taille:',
-      this.states.length,
-      'index:',
-      this.indexState
-    );
   }
 
   redo(): void {
@@ -62,13 +47,6 @@ export class DrawingDataService {
       this.indexState++;
       this.canvasService.drawCanvas(this.states[this.indexState]);
     }
-    console.log(
-      'redo',
-      'taille:',
-      this.states.length,
-      'index:',
-      this.indexState
-    );
   }
 
   getColor(): string {

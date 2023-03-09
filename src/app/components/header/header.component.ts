@@ -81,4 +81,15 @@ export class HeaderComponent {
   onRedo() {
     this.drawingDataService.redo();
   }
+
+  undoAvailable(): boolean {
+    return this.drawingDataService.indexState > 0;
+  }
+
+  redoAvailable(): boolean {
+    return (
+      this.drawingDataService.indexState <
+      this.drawingDataService.states.length - 1
+    );
+  }
 }

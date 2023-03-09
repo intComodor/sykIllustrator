@@ -1,27 +1,27 @@
 <div id="header">
-  <span (click)="onUndo()">
+  <button (click)="onUndo()" [class.btnDisabled]="!undoAvailable()">
     <img src="../../../assets/header/undo.svg" alt="icon for undo action" />
-  </span>
-  <span (click)="onRedo()">
+  </button>
+  <button (click)="onRedo()" [class.btnDisabled]="!redoAvailable()">
     <img src="../../../assets/header/redo.svg" alt="icon for redo action" />
-  </span>
-  <span (click)="onFullScreen()">
+  </button>
+  <button (click)="onFullScreen()">
     <img
       src="../../../assets/header/fullscreen.svg"
       alt="icon for fullscreen mode" />
-  </span>
-  <span (click)="onChangeFormat()">
+  </button>
+  <button (click)="onChangeFormat()">
     <img
       src="../../../assets/header/formats.svg"
       alt="icon for change format" />
-  </span>
-  <span (click)="onClear()">
+  </button>
+  <button (click)="onClear()">
     <img
       src="../../../assets/header/clear.svg"
       alt="icon for clear the canvas" />
-  </span>
+  </button>
   <input type="text" placeholder="Untitled" [formControl]="filename" />
-  <span (click)="onSave()">
+  <button (click)="onSave()">
     <img src="../../../assets/header/save.svg" alt="icon for save the canvas" />
-  </span>
+  </button>
 </div>
