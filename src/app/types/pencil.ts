@@ -36,6 +36,7 @@ export class Pencil extends Tool {
       this.drawingDataService.getColor();
     this.canvasService.canvasCtx.lineWidth =
       this.drawingDataService.getLineWidth();
+    this.canvasService.canvasCtx.lineCap = 'round';
     this.canvasService.canvasCtx.beginPath();
     this.canvasService.canvasCtx.moveTo(x1, y1);
     this.canvasService.canvasCtx.lineTo(x2, y2);
