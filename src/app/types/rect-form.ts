@@ -30,13 +30,15 @@ export class RectForm extends Tool {
           x < this.canvasService.canvas.width &&
           y >= 0 &&
           y < this.canvasService.canvas.height
-        )
+        ) {
           this.draw({
             x1: startPosition.x,
             y1: startPosition.y,
             x2: endPosition.x,
             y2: endPosition.y,
           });
+          this.drawingDataService.pushState();
+        }
       })
     );
   }

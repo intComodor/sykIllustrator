@@ -30,13 +30,15 @@ export class Line extends Tool {
           x < this.canvasService.canvas.width &&
           y >= 0 &&
           y < this.canvasService.canvas.height
-        )
+        ) {
           this.draw({
             x1: startX,
             y1: startY,
             x2: event.offsetX,
             y2: event.offsetY,
           });
+          this.drawingDataService.pushState();
+        }
       })
     );
   }

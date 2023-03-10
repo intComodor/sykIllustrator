@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import html2canvas from 'html2canvas';
 import { CanvasService } from 'src/app/services/canvas.service';
+import { DrawingDataService } from 'src/app/services/drawing-data.service';
 
 /**
  * Header component.
@@ -14,7 +15,10 @@ import { CanvasService } from 'src/app/services/canvas.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  constructor(private canvasService: CanvasService) {}
+  constructor(
+    private canvasService: CanvasService,
+    private drawingDataService: DrawingDataService
+  ) {}
 
   /**
    * Form control for the filename input,
@@ -57,7 +61,8 @@ export class HeaderComponent {
    * for the logic of the clear.
    */
   onClear() {
-    this.canvasService.clear();
+    this.canvasService.clear('withConfirmation');
+    this.drawingDataService.clearStates();
   }
 
   /**
@@ -67,5 +72,24 @@ export class HeaderComponent {
    */
   onFullScreen() {
     this.canvasService.setFullScreen(true);
+  }
+
+  onUndo() {
+    this.drawingDataService.undo();
+  }
+
+  onRedo() {
+    this.drawingDataService.redo();
+  }
+
+  undoAvailable(): boolean {
+    return this.drawingDataService.indexState > 0;
+  }
+
+  redoAvailable(): boolean {
+    return (
+      this.drawingDataService.indexState <
+      this.drawingDataService.states.length - 1
+    );
   }
 }
