@@ -2,12 +2,14 @@
   <div class="title-section">TOOLS</div>
   <div class="list-tools">
     <div
+      matTooltip="pencil tool"
       class="box-tool"
       (click)="changeTool('Pencil')"
       [class.tool-selected]="'Pencil' === currentTool()">
       <img src="../../../assets/tools/pencil.svg" alt="pencil tool" />
     </div>
     <div
+      matTooltip="segment tool"
       class="box-tool"
       (click)="changeTool('Line')"
       [class.tool-selected]="'Line' === currentTool()">
@@ -18,6 +20,7 @@
   <div class="title-section">SHAPES</div>
   <div class="list-shapes">
     <div
+      matTooltip="rectangle shape"
       class="box-shape"
       (click)="changeTool('RectForm')"
       [class.tool-selected]="'RectForm' === currentTool()">
