@@ -9,6 +9,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DrawingDataService } from './services/drawing-data.service';
 import { MouseEventService } from './services/mouse-event.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,13 @@ import { MouseEventService } from './services/mouse-event.service';
     OptionsPanelComponent,
     HeaderComponent,
   ],
-  imports: [BrowserModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatTooltipModule,
+    BrowserAnimationsModule,
+  ],
   providers: [DrawingDataService, MouseEventService],
   bootstrap: [AppComponent],
 })
