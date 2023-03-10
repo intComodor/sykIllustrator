@@ -1,27 +1,37 @@
 <div id="header">
-  <button (click)="onUndo()" [class.btnDisabled]="!undoAvailable()">
+  <button
+    (click)="onUndo()"
+    [class.btnDisabled]="!undoAvailable()"
+    [matTooltip]="undoAvailable() ? 'undo' : ''">
     <img src="../../../assets/header/undo.svg" alt="icon for undo action" />
   </button>
-  <button (click)="onRedo()" [class.btnDisabled]="!redoAvailable()">
+  <button
+    (click)="onRedo()"
+    [class.btnDisabled]="!redoAvailable()"
+    [matTooltip]="redoAvailable() ? 'redo' : ''">
     <img src="../../../assets/header/redo.svg" alt="icon for redo action" />
   </button>
-  <button (click)="onFullScreen()">
+  <button matTooltip="full screen mode" (click)="onFullScreen()">
     <img
       src="../../../assets/header/fullscreen.svg"
       alt="icon for fullscreen mode" />
   </button>
-  <button (click)="onChangeFormat()">
+  <button (click)="onChangeFormat()" matTooltip="change format">
     <img
       src="../../../assets/header/formats.svg"
       alt="icon for change format" />
   </button>
-  <button (click)="onClear()">
+  <button (click)="onClear()" matTooltip="clear canvas">
     <img
       src="../../../assets/header/clear.svg"
       alt="icon for clear the canvas" />
   </button>
-  <input type="text" placeholder="Untitled" [formControl]="filename" />
-  <button (click)="onSave()">
+  <input
+    type="text"
+    placeholder="Untitled"
+    [formControl]="filename"
+    matTooltip="canvas title" />
+  <button (click)="onSave()" matTooltip="download canvas">
     <img src="../../../assets/header/save.svg" alt="icon for save the canvas" />
   </button>
 </div>
