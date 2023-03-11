@@ -23,11 +23,19 @@ export class CanvasService {
   /** Canvas context initialized in the drawing component */
   public canvasCtx!: CanvasRenderingContext2D;
 
-  isFullScreen = false;
+  isFullScreenMode = false;
+
+  /** Check if the window is inferior to minWidth or minHeight */
+  isWindowTooSmall(): boolean {
+    return (
+      window.innerWidth < this.minWidth + 5 ||
+      window.innerHeight < this.minHeight + 5
+    );
+  }
 
   /** Set the canvas to fullscreen mode with the resize function */
-  setFullScreen(value: boolean) {
-    this.isFullScreen = value;
+  setFullScreenMode(value: boolean) {
+    this.isFullScreenMode = value;
     this.resize();
   }
 
@@ -55,11 +63,7 @@ export class CanvasService {
     const tmpCanvas: HTMLCanvasElement = this.createTmpCanvas();
 
     // Resize the canvas
-    if (
-      window.innerWidth < this.minWidth ||
-      window.innerHeight < this.minHeight ||
-      this.isFullScreen
-    ) {
+    if (this.isWindowTooSmall() || this.isFullScreenMode) {
       this.canvas.width = window.innerWidth;
       this.canvas.height = window.innerHeight;
     } else {

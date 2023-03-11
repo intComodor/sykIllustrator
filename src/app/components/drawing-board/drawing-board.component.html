@@ -1,6 +1,14 @@
-<canvas #board [ngClass]="{ full: isFullScreen() }" id="board" class="board">
+<canvas
+  #board
+  [ngClass]="{ full: isFullScreenMode() }"
+  id="board"
+  class="board">
 </canvas>
 
-<div
-  [ngClass]="{ back: isFullScreen() }"
-  [style.display]="isFullScreen() ? 'block' : 'none'"></div>
+<div *ngIf="isFullScreenMode()" class="back"></div>
+<img
+  *ngIf="isFullScreenMode() && showBtnQuitFullScreen()"
+  (click)="onExitFullScreenMode()"
+  src="../../../assets/header/clear.svg"
+  alt="icon for exit fullscreen mode"
+  matTooltip="exit fullscreen mode" />

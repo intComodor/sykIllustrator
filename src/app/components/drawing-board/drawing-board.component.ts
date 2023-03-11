@@ -25,8 +25,12 @@ export class DrawingBoardComponent implements AfterViewInit {
   @ViewChild('board', { static: true })
   _canvas: ElementRef | undefined;
 
-  isFullScreen(): boolean {
-    return this.canvasService.isFullScreen;
+  isFullScreenMode(): boolean {
+    return this.canvasService.isFullScreenMode;
+  }
+
+  showBtnQuitFullScreen(): boolean {
+    return !this.canvasService.isWindowTooSmall();
   }
 
   constructor(
@@ -66,12 +70,7 @@ export class DrawingBoardComponent implements AfterViewInit {
     this.canvasService.resize();
   }
 
-  /**
-   * Exit fullscreen mode when the user clicks on the canvas,
-   * so when we are in fullscreen mode, the user can exit it by clicking on the canvas.
-   */
-  @HostListener('mousedown', ['$event.target'])
-  onClick() {
-    this.canvasService.setFullScreen(false);
+  onExitFullScreenMode() {
+    this.canvasService.setFullScreenMode(false);
   }
 }

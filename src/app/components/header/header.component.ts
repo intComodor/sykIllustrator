@@ -71,7 +71,7 @@ export class HeaderComponent {
    * for the logic of the full screen.
    */
   onFullScreen() {
-    this.canvasService.setFullScreen(true);
+    this.canvasService.setFullScreenMode(true);
   }
 
   onUndo() {
