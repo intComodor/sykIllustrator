@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "syk-illustrator": {
+    "sykIllustrator": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -86,10 +86,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "syk-illustrator:build:production"
+              "browserTarget": "sykIllustrator:build:production"
             },
             "development": {
-              "browserTarget": "syk-illustrator:build:development"
+              "browserTarget": "sykIllustrator:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -97,7 +97,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "syk-illustrator:build"
+            "browserTarget": "sykIllustrator:build"
           }
         },
         "test": {
