@@ -17,6 +17,8 @@ export class OptionsPanelComponent {
     private toolsService: ToolsService
   ) {}
 
+  cc = '#329252';
+
   /** Get the current line width with the drawing data service */
   lineWidth = this.drawingDataService.getLineWidth();
   /** Get the current filling state with the drawing data service */
