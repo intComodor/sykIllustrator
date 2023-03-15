@@ -1,11 +1,14 @@
 <div class="option-panel">
-  <div class="title-section">COLORS</div>
+  <div class="title-section">COLOR</div>
   <div style="display: flex; gap: 7px">
     <span>
-      <ngx-colors ngx-colors-trigger [(ngModel)]="cc"></ngx-colors>
+      <ngx-colors
+        ngx-colors-trigger
+        [(ngModel)]="defaultColor"
+        (input)="setColor($event)"></ngx-colors>
     </span>
     <span>
-      <input matInput [(ngModel)]="cc" />
+      <input [(ngModel)]="defaultColor" (ngModelChange)="setColor($event)" />
     </span>
   </div>
 

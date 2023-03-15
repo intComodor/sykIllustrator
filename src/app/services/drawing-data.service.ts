@@ -11,7 +11,7 @@ import { CanvasService } from './canvas.service';
 export class DrawingDataService {
   constructor(private canvasService: CanvasService) {}
 
-  private color = 'red';
+  private color = '#00897b';
   private lineWidth = 2;
   private isDrawing = false;
   private fill = false;

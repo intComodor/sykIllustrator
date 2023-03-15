@@ -17,8 +17,7 @@ export class OptionsPanelComponent {
     private toolsService: ToolsService
   ) {}
 
-  cc = '#329252';
-
+  defaultColor = this.drawingDataService.getColor();
   /** Get the current line width with the drawing data service */
   lineWidth = this.drawingDataService.getLineWidth();
   /** Get the current filling state with the drawing data service */
@@ -26,22 +25,6 @@ export class OptionsPanelComponent {
 
   setFilling(value: boolean) {
     this.drawingDataService.setFill(value);
-  }
-
-  /** List of available colors */
-  colors: string[] = [
-    'black',
-    'red',
-    'blue',
-    'green',
-    'yellow',
-    'orange',
-    'purple',
-    'brown',
-  ];
-
-  currentColor(): string {
-    return this.drawingDataService.getColor();
   }
 
   setColor(color: string) {
