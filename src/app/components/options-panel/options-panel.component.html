@@ -13,18 +13,22 @@
   </div>
 
   <div class="title-section">LINE WIDTH</div>
-  <div class="block-width">
+  <div style="display: flex; gap: 7px">
+    <div class="block-width">
+      <input
+        class="slider-line-width"
+        type="range"
+        min="2"
+        max="30"
+        step="1"
+        [(ngModel)]="lineWidth"
+        (ngModelChange)="setLineWidth(lineWidth)" />
+    </div>
     <input
-      style="width: 75px"
-      class="slider-line-width"
-      type="range"
-      min="2"
-      max="30"
-      step="1"
+      id="input-txt-width"
       [(ngModel)]="lineWidth"
       (ngModelChange)="setLineWidth(lineWidth)" />
   </div>
-
   <div class="title-section" *ngIf="currentTool() == 'RectForm'">FILLING</div>
   <div class="block-filling" *ngIf="currentTool() == 'RectForm'">
     <input
