@@ -28,7 +28,6 @@
   margin-top: 10px;
 }
 
-.block-width,
 .block-filling {
   width: 88px;
   height: 27px;
@@ -50,6 +49,31 @@
 span input {
   width: 67px;
   height: 18px;
+  background-color: #323232;
+  // color: #b2b2b2;
+  color: black;
+  border-radius: 1px;
+  border: 1px;
+  // padding-left: 7px;
+  outline: none;
+  text-align: center;
+}
+
+.block-width {
+  width: 62px;
+  height: 27px;
+  background-color: var(--grey2);
+  border-radius: 2px;
+  padding-left: 8px;
+  padding-right: 8px;
+  // justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+#input-txt-width {
+  width: 19px;
+  height: 27px;
   background-color: #323232;
   // color: #b2b2b2;
   color: black;
