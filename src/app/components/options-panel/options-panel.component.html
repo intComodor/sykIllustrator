@@ -1,13 +1,15 @@
 <div class="option-panel">
-  <div class="title-section">COLORS</div>
-  <div class="list-colors">
-    <ng-container *ngFor="let color of colors">
-      <div
-        [class.color-selected]="color === currentColor()"
-        (click)="setColor(color)"
-        class="color-box-inner"
-        [ngStyle]="{ 'background-color': color }"></div>
-    </ng-container>
+  <div class="title-section">COLOR</div>
+  <div style="display: flex; gap: 7px">
+    <span>
+      <ngx-colors
+        ngx-colors-trigger
+        [(ngModel)]="defaultColor"
+        (input)="setColor($event)"></ngx-colors>
+    </span>
+    <span>
+      <input [(ngModel)]="defaultColor" (ngModelChange)="setColor($event)" />
+    </span>
   </div>
 
   <div class="title-section">LINE WIDTH</div>

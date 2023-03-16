@@ -28,34 +28,6 @@
   margin-top: 10px;
 }
 
-.list-colors {
-  overflow-x: auto;
-  white-space: nowrap;
-  align-items: baseline;
-  justify-content: baseline;
-}
-
-.color-box-inner {
-  height: 19px;
-  width: 19px;
-  display: inline-block;
-}
-
-.color-box-inner:not(:last-child) {
-  margin-right: 4px;
-}
-
-.color-box-inner:hover {
-  cursor: pointer;
-  scale: 1.1;
-}
-
-.color-selected {
-  border: var(--grey2) solid 2px;
-  margin-bottom: -2px;
-  margin-up: 2px;
-}
-
 .block-width,
 .block-filling {
   width: 88px;
@@ -73,4 +45,17 @@
   color: var(--grey6);
   font-family: var(--font-family);
   font-size: var(--font-size2);
+}
+
+span input {
+  width: 67px;
+  height: 18px;
+  background-color: #323232;
+  // color: #b2b2b2;
+  color: black;
+  border-radius: 1px;
+  border: 1px;
+  // padding-left: 7px;
+  outline: none;
+  text-align: center;
 }

@@ -158,3 +158,59 @@ input[type='range']:focus::-ms-fill-lower {
 input[type='range']:focus::-ms-fill-upper {
   background: #3071a9;
 }
+
+// styles for ngx-colors-panel
+
+ngx-colors-panel .opened {
+  background-color: var(--grey3) !important;
+  color: white !important;
+}
+
+.opened .nav-wrapper {
+  color: white !important;
+}
+
+.opened button {
+  color: white !important;
+}
+
+.nav-wrapper svg {
+  filter: invert(1);
+}
+
+.wrapper svg {
+  filter: invert(1);
+}
+
+ngx-colors-panel {
+  font-family: var(--font-family) !important;
+}
+
+.app-color-picker .preview {
+  border-radius: 10% !important;
+  padding: 0px !important;
+  margin: 0px !important;
+  margin-left: 2px !important;
+  box-shadow: none !important;
+  background: var(--grey4) !important;
+}
+
+.app-color-picker .circle {
+  border-radius: 10% !important;
+}
+
+.opened .colors .circle {
+  border-radius: 10% !important;
+}
+
+.color-picker .selected-color {
+  border-radius: 10% !important;
+}
+
+.selected {
+  border-radius: 10% !important;
+  border: 2px solid #929292 !important;
+  height: 34px !important;
+  width: 34px !important;
+  margin: -1px !important;
+}

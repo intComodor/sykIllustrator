@@ -11,6 +11,7 @@ import { DrawingDataService } from './services/drawing-data.service';
 import { MouseEventService } from './services/mouse-event.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxColorsModule } from 'ngx-colors';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     MatTooltipModule,
     BrowserAnimationsModule,
+    NgxColorsModule,
   ],
   providers: [DrawingDataService, MouseEventService],
   bootstrap: [AppComponent],
