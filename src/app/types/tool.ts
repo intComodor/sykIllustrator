@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 import { CanvasService } from '../services/canvas.service';
 import { DrawingDataService } from '../services/drawing-data.service';
 import { MouseEventService } from '../services/mouse-event.service';
+import { CouplePoints } from './couplePoints';
+import { Point } from './point';
 
 export abstract class Tool {
   name: string;
@@ -29,19 +31,9 @@ export abstract class Tool {
    */
   abstract initTool(): void;
 
-  abstract draw({
-    x1,
-    y1,
-    x2,
-    y2,
-  }: {
-    x1: number;
-    y1: number;
-    x2: number;
-    y2: number;
-  }): void;
+  abstract draw(coords: Point | CouplePoints): void;
 
-  /** Disable the tool by unsubscribing from all events. */
+  /** Disable the tool by unsubscribing from all subscribing events */
   disableTool(): void {
     this.eventsSubscription.forEach(subscription => subscription.unsubscribe());
   }
