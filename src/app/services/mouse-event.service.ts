@@ -8,6 +8,7 @@ import {
   share,
   takeUntil,
 } from 'rxjs';
+import { CouplePoints } from '../types/couplePoints';
 
 /**
  * Mouse event service.
@@ -32,7 +33,9 @@ export class MouseEventService {
    * @param canvas the element to listen to the event.
    * @returns an observable of the mouse move event on the canvas element.
    */
-  public mousemove$(canvas: HTMLCanvasElement): Observable<MouseEvent> {
+  public mousemove$(
+    canvas: HTMLCanvasElement | Window
+  ): Observable<MouseEvent> {
     return fromEvent<MouseEvent>(canvas, 'mousemove').pipe(share());
   }
 
@@ -51,29 +54,37 @@ export class MouseEventService {
    * @returns an observable of the mouse drag event on the canvas element.
    * The event contains the coordinates of each position of the mouse during the drag.
    */
-  public mousedrag$(canvas: HTMLCanvasElement): Observable<{
-    x1: number;
-    y1: number;
-    x2: number;
-    y2: number;
-  }> {
+  public mousedrag$(canvas: HTMLCanvasElement): Observable<CouplePoints> {
     return this.mousedown$(canvas).pipe(
       mergeMap(downEvent =>
         this.mousemove$(canvas).pipe(
           takeUntil(merge(this.mouseup$, fromEvent(canvas, 'mouseleave'))),
           scan(
-            (lastPosition, moveEvent) => ({
-              x1: lastPosition.x2,
-              y1: lastPosition.y2,
-              x2: moveEvent.offsetX,
-              y2: moveEvent.offsetY,
-            }),
-            {
-              x1: downEvent.offsetX,
-              y1: downEvent.offsetY,
-              x2: downEvent.offsetX,
-              y2: downEvent.offsetY,
-            }
+            (lastPosition, moveEvent) =>
+              //   {
+              //   x1: lastPosition.x2,
+              //   y1: lastPosition.y2,
+              //   x2: moveEvent.offsetX,
+              //   y2: moveEvent.offsetY,
+              // }
+              new CouplePoints(
+                lastPosition.endX,
+                lastPosition.endY,
+                moveEvent.offsetX,
+                moveEvent.offsetY
+              ),
+            // {
+            //   x1: downEvent.offsetX,
+            //   y1: downEvent.offsetY,
+            //   x2: downEvent.offsetX,
+            //   y2: downEvent.offsetY,
+            // }
+            new CouplePoints(
+              downEvent.offsetX,
+              downEvent.offsetY,
+              downEvent.offsetX,
+              downEvent.offsetY
+            )
           )
         )
       )
