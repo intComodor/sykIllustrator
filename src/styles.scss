@@ -214,3 +214,13 @@ ngx-colors-panel {
   width: 34px !important;
   margin: -1px !important;
 }
+
+.mdc-snackbar__label,
+.mdc-snackbar__surface {
+  padding: 0px !important;
+  background-color: #ffffffcd;
+}
+
+.mdc-linear-progress__bar-inner {
+  border-color: #595959 !important;
+}
