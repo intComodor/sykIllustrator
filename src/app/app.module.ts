@@ -11,6 +11,10 @@ import { DrawingDataService } from './services/drawing-data.service';
 import { MouseEventService } from './services/mouse-event.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxColorsModule } from 'ngx-colors';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SnakeBarComponent } from './components/snake-bar/snake-bar.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -19,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ToolsPanelComponent,
     OptionsPanelComponent,
     HeaderComponent,
+    SnakeBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +31,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     MatTooltipModule,
     BrowserAnimationsModule,
+    NgxColorsModule,
+    MatSnackBarModule,
+    MatProgressBarModule,
   ],
   providers: [DrawingDataService, MouseEventService],
   bootstrap: [AppComponent],

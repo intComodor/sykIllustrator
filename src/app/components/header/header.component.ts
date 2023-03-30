@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import html2canvas from 'html2canvas';
 import { CanvasService } from 'src/app/services/canvas.service';
 import { DrawingDataService } from 'src/app/services/drawing-data.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 /**
  * Header component.
@@ -17,7 +17,8 @@ import { DrawingDataService } from 'src/app/services/drawing-data.service';
 export class HeaderComponent {
   constructor(
     private canvasService: CanvasService,
-    private drawingDataService: DrawingDataService
+    private drawingDataService: DrawingDataService,
+    private storageService: StorageService
   ) {}
 
   /**
@@ -31,19 +32,7 @@ export class HeaderComponent {
    * It converts the canvas to a blob and then download it.
    */
   onSave() {
-    const canvas = this.canvasService.canvas;
-
-    html2canvas(canvas).then(canvas => {
-      // Convert the canvas to blob
-      canvas.title = (this.filename.value || 'untitled') + '.png';
-      canvas.toBlob((blob: Blob | null) => {
-        if (!blob) throw new Error('Blob is not defined');
-        const link = document.createElement('a');
-        link.download = canvas.title;
-        link.href = URL.createObjectURL(blob);
-        link.click();
-      }, 'image/png');
-    });
+    this.storageService.exportToPng(this.filename.value);
   }
 
   /**

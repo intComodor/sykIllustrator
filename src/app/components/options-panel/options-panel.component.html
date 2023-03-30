@@ -1,28 +1,34 @@
 <div class="option-panel">
-  <div class="title-section">COLORS</div>
-  <div class="list-colors">
-    <ng-container *ngFor="let color of colors">
-      <div
-        [class.color-selected]="color === currentColor()"
-        (click)="setColor(color)"
-        class="color-box-inner"
-        [ngStyle]="{ 'background-color': color }"></div>
-    </ng-container>
+  <div class="title-section">COLOR</div>
+  <div style="display: flex; gap: 7px">
+    <span>
+      <ngx-colors
+        ngx-colors-trigger
+        [(ngModel)]="defaultColor"
+        (input)="setColor($event)"></ngx-colors>
+    </span>
+    <span>
+      <input [(ngModel)]="defaultColor" (ngModelChange)="setColor($event)" />
+    </span>
   </div>
 
   <div class="title-section">LINE WIDTH</div>
-  <div class="block-width">
+  <div style="display: flex; gap: 7px">
+    <div class="block-width">
+      <input
+        class="slider-line-width"
+        type="range"
+        min="2"
+        max="30"
+        step="1"
+        [(ngModel)]="lineWidth"
+        (ngModelChange)="setLineWidth(lineWidth)" />
+    </div>
     <input
-      style="width: 75px"
-      class="slider-line-width"
-      type="range"
-      min="2"
-      max="30"
-      step="1"
+      id="input-txt-width"
       [(ngModel)]="lineWidth"
       (ngModelChange)="setLineWidth(lineWidth)" />
   </div>
-
   <div class="title-section" *ngIf="currentTool() == 'RectForm'">FILLING</div>
   <div class="block-filling" *ngIf="currentTool() == 'RectForm'">
     <input

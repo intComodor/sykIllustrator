@@ -131,4 +131,16 @@ export class CanvasService {
       this.canvas.height
     );
   }
+
+  isInCanvas(x: number, y: number): boolean {
+    const canvasRect = this.canvas.getBoundingClientRect();
+    const canvasX = x - canvasRect.left;
+    const canvasY = y - canvasRect.top;
+    return (
+      canvasX >= 0 &&
+      canvasX < this.canvas.width &&
+      canvasY >= 0 &&
+      canvasY < this.canvas.height
+    );
+  }
 }

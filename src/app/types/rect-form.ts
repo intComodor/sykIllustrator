@@ -1,3 +1,4 @@
+import { CouplePoints } from './couplePoints';
 import { Tool } from './tool';
 
 export class RectForm extends Tool {
@@ -5,59 +6,68 @@ export class RectForm extends Tool {
     super('RectForm', 'black');
   }
 
-  initTool(): void {
-    let startPosition = { x: 0, y: 0 };
-    let endPosition = { x: 0, y: 0 };
+  /** Coordinates of the rectangle to draw */
+  coords: CouplePoints = new CouplePoints(0, 0, 0, 0);
+  lastState!: HTMLCanvasElement;
+  isDrawing = false;
 
+  initTool(): void {
+    // behavior when the mouse is pressed
     this.eventsSubscription.push(
       this.mouseEventService
         .mousedown$(this.canvasService.canvas)
         .subscribe(event => {
-          startPosition = { x: event.offsetX, y: event.offsetY };
+          this.coords.startX = event.offsetX;
+          this.coords.startY = event.offsetY;
+
+          this.lastState = this.canvasService.createTmpCanvas();
+          this.isDrawing = true;
         })
     );
 
+    // behavior when the mouse is moved
+    this.eventsSubscription.push(
+      this.mouseEventService.mousemove$(window).subscribe(event => {
+        if (!this.isDrawing) return;
+
+        if (this.canvasService.isInCanvas(event.clientX, event.clientY)) {
+          this.canvasService.drawCanvas(this.lastState);
+          this.coords.endX = event.offsetX;
+          this.coords.endY = event.offsetY;
+          this.draw(this.coords);
+        } else {
+          this.isDrawing = false;
+          this.drawingDataService.pushState();
+          this.lastState = this.canvasService.createTmpCanvas();
+        }
+      })
+    );
+
+    // behavior when the mouse is released
     this.eventsSubscription.push(
       this.mouseEventService.mouseup$.subscribe(event => {
-        endPosition = { x: event.offsetX, y: event.offsetY };
-        const canvasRect = this.canvasService.canvas.getBoundingClientRect();
-        const x = event.clientX - canvasRect.left;
-        const y = event.clientY - canvasRect.top;
+        if (!this.isDrawing) return;
+
+        this.coords.endX = event.offsetX;
+        this.coords.endY = event.offsetY;
 
         // Check if the mouse is still on the canvas before drawing
-        if (
-          x >= 0 &&
-          x < this.canvasService.canvas.width &&
-          y >= 0 &&
-          y < this.canvasService.canvas.height
-        ) {
-          this.draw({
-            x1: startPosition.x,
-            y1: startPosition.y,
-            x2: endPosition.x,
-            y2: endPosition.y,
-          });
+        if (this.canvasService.isInCanvas(event.clientX, event.clientY)) {
+          this.draw(this.coords);
           this.drawingDataService.pushState();
+          this.isDrawing = false;
+          this.lastState = this.canvasService.createTmpCanvas();
         }
       })
     );
   }
 
-  draw({
-    x1,
-    y1,
-    x2,
-    y2,
-  }: {
-    x1: number;
-    y1: number;
-    x2: number;
-    y2: number;
-  }): void {
-    const startX = Math.min(x1, x2);
-    const startY = Math.min(y1, y2);
-    const width = Math.abs(x2 - x1);
-    const height = Math.abs(y2 - y1);
+  draw(coords: CouplePoints): void {
+    // Calculate the coordinates of the rectangle to draw
+    const startX = Math.min(coords.startX, coords.endX);
+    const startY = Math.min(coords.startY, coords.endY);
+    const width = Math.abs(coords.endX - coords.startX);
+    const height = Math.abs(coords.endY - coords.startY);
 
     this.canvasService.canvasCtx.strokeStyle =
       this.drawingDataService.getColor();
