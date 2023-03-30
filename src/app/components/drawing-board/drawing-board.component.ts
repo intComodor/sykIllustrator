@@ -8,6 +8,9 @@ import {
 import { CanvasService } from 'src/app/services/canvas.service';
 import { DrawingDataService } from 'src/app/services/drawing-data.service';
 import { ToolsService } from 'src/app/services/tools.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnakeBarComponent } from '../snake-bar/snake-bar.component';
+import { StorageService } from 'src/app/services/storage.service';
 
 /**
  * Drawing board component.
@@ -36,7 +39,9 @@ export class DrawingBoardComponent implements AfterViewInit {
   constructor(
     private canvasService: CanvasService,
     private toolsService: ToolsService,
-    private drawingDataService: DrawingDataService
+    private drawingDataService: DrawingDataService,
+    private snackBar: MatSnackBar,
+    private storageService: StorageService
   ) {}
 
   /**
@@ -46,6 +51,18 @@ export class DrawingBoardComponent implements AfterViewInit {
     this.initCanvas();
     this.toolsService.tool.initTool();
     this.drawingDataService.initStates();
+
+    // open snackbar asking if the user wants to restore her last drawing
+    if (this.storageService.isDrawingStored()) {
+      setTimeout(() => {
+        this.snackBar.openFromComponent(SnakeBarComponent);
+      }, 2000);
+    }
+
+    // we store the drawing in the local storage before the user leaves the page
+    window.addEventListener('beforeunload', () => {
+      this.storageService.storeDrawing();
+    });
   }
 
   /**
