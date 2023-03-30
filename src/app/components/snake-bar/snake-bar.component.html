@@ -1,0 +1,11 @@
+<div id="custom-snake-bar">
+  <div id="inner-snake-bar">
+    <span>Restore your last drawing ?</span>
+    <span (click)="onYes()">Yes</span>
+    <span (click)="onNo()">No</span>
+  </div>
+  <mat-progress-bar
+    mode="determinate"
+    [value]="progressBarValue"
+    color="accent"></mat-progress-bar>
+</div>
