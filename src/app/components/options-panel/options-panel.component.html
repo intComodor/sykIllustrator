@@ -1,6 +1,6 @@
 <div class="option-panel">
-  <div class="title-section">COLOR</div>
-  <div style="display: flex; gap: 7px">
+  <div class="title-section" *ngIf="currentTool() !== 'Eraser'">COLOR</div>
+  <div style="display: flex; gap: 7px" *ngIf="currentTool() !== 'Eraser'">
     <span>
       <ngx-colors
         ngx-colors-trigger
