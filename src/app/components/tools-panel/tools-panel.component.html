@@ -15,6 +15,14 @@
       [class.tool-selected]="'Line' === currentTool()">
       <img src="../../../assets/tools/segment.svg" alt="segment tool" />
     </div>
+
+    <div
+      matTooltip="eraser tool"
+      class="box-tool"
+      (click)="changeTool('Eraser')"
+      [class.tool-selected]="'Eraser' === currentTool()">
+      <img src="../../../assets/tools/eraser.svg" alt="segment tool" />
+    </div>
   </div>
 
   <div class="title-section">SHAPES</div>

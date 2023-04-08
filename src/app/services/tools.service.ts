@@ -3,6 +3,7 @@ import { Tool } from 'src/app/types/tool';
 import { Pencil } from 'src/app/types/pencil';
 import { RectForm } from 'src/app/types/rect-form';
 import { Line } from '../types/line';
+import { Eraser } from '../types/eraser';
 
 /**
  * Tools service.
@@ -17,6 +18,7 @@ export class ToolsService {
     ['Line', new Line()],
     ['Pencil', new Pencil()],
     ['RectForm', new RectForm()],
+    ['Eraser', new Eraser()],
   ]);
 
   private defaultTool = 'Pencil';
