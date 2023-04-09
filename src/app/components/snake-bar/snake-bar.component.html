@@ -1,10 +1,13 @@
 <div id="custom-snake-bar">
-  <div id="inner-snake-bar">
-    <span>Restore your last drawing ?</span>
-    <span (click)="onYes()">Yes</span>
-    <span (click)="onNo()">No</span>
+  <div id="inner-snake-bar" [ngStyle]="{ color: colorModel() }">
+    <span>{{ message }}</span>
+    <ng-container *ngIf="model === 'question'">
+      <span (click)="onYes()">Ok</span>
+      <span (click)="onNo()">No</span>
+    </ng-container>
   </div>
   <mat-progress-bar
+    [ngClass]="model"
     mode="determinate"
     [value]="progressBarValue"
     color="accent"></mat-progress-bar>

@@ -121,7 +121,7 @@ export class CanvasService {
   /**
    * Replace the current canvas with the canvas passed in parameter.
    */
-  drawCanvas(canvas: HTMLCanvasElement) {
+  drawCanvas(canvas: HTMLCanvasElement | HTMLImageElement) {
     this.clear('withoutConfirmation');
     this.canvasCtx.drawImage(
       canvas,

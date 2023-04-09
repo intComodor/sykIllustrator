@@ -1,5 +1,8 @@
-import { Component, HostListener } from '@angular/core';
-import { MatSnackBarRef } from '@angular/material/snack-bar';
+import { Component, HostListener, Inject } from '@angular/core';
+import {
+  MatSnackBarRef,
+  MAT_SNACK_BAR_DATA,
+} from '@angular/material/snack-bar';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
@@ -8,6 +11,9 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./snake-bar.component.scss'],
 })
 export class SnakeBarComponent {
+  message = '';
+  model = 'info';
+
   /** Value of the progress bar */
   progressBarValue = 100;
   /** Duration of the snackbar before it closes */
@@ -18,9 +24,29 @@ export class SnakeBarComponent {
 
   constructor(
     private snackBarRef: MatSnackBarRef<SnakeBarComponent>,
-    private storageService: StorageService
+    private storageService: StorageService,
+    @Inject(MAT_SNACK_BAR_DATA)
+    public data: {
+      message: string;
+      model: 'info' | 'question' | 'error';
+    }
   ) {
+    this.message = data.message;
+    this.model = data.model;
     this.runProgressBar();
+  }
+
+  colorModel(): string {
+    switch (this.model) {
+      case 'info':
+        return 'green';
+      case 'question':
+        return 'black';
+      case 'error':
+        return 'red';
+      default:
+        return 'black';
+    }
   }
 
   /**
@@ -53,7 +79,7 @@ export class SnakeBarComponent {
   }
 
   onYes() {
-    this.storageService.restoreDrawing();
+    this.storageService.restoreDrawingFromLocalStorage();
     this.snackBarRef.dismiss();
   }
 

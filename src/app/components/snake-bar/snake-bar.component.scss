@@ -37,3 +37,15 @@ span:nth-child(2):hover,
 span:nth-child(3):hover {
   background-color: #797979;
 }
+
+::ng-deep .question .mdc-linear-progress__bar-inner {
+  border-color: #595959 !important;
+}
+
+::ng-deep .error .mdc-linear-progress__bar-inner {
+  border-color: red !important;
+}
+
+::ng-deep .info .mdc-linear-progress__bar-inner {
+  border-color: green !important;
+}

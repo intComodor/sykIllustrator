@@ -55,13 +55,18 @@ export class DrawingBoardComponent implements AfterViewInit {
     // open snackbar asking if the user wants to restore her last drawing
     if (this.storageService.isDrawingStored()) {
       setTimeout(() => {
-        this.snackBar.openFromComponent(SnakeBarComponent);
+        this.snackBar.openFromComponent(SnakeBarComponent, {
+          data: {
+            message: 'Restore your last drawing ?',
+            model: 'question',
+          },
+        });
       }, 2000);
     }
 
     // we store the drawing in the local storage before the user leaves the page
     window.addEventListener('beforeunload', () => {
-      this.storageService.storeDrawing();
+      this.storageService.storeDrawingInLocalStorage();
     });
   }
 

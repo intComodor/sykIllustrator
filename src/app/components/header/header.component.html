@@ -11,6 +11,19 @@
     [matTooltip]="redoAvailable() ? 'redo' : ''">
     <img src="../../../assets/header/redo.svg" alt="icon for redo action" />
   </button>
+  <label for="file-input" class="file-input-label">
+    <button (click)="fileInput.click()">
+      <img src="../../../assets/header/upload.svg" alt="icon for import file" />
+    </button>
+  </label>
+  <input
+    id="file-input"
+    type="file"
+    accept=".syk"
+    (change)="onFileSelected($event)"
+    class="file-input"
+    #fileInput
+    style="display: none" />
   <button matTooltip="full screen mode" (click)="onFullScreen()">
     <img
       src="../../../assets/header/fullscreen.svg"
@@ -26,14 +39,26 @@
       src="../../../assets/header/delete.svg"
       alt="icon for clear the canvas" />
   </button>
+
   <input
     type="text"
     placeholder="Untitled"
     [formControl]="filename"
-    matTooltip="canvas title" />
-  <button (click)="onSave()" matTooltip="download canvas">
+    matTooltip="canvas title"
+    (change)="onFilenameChange()" />
+
+  <button [matMenuTriggerFor]="menu">
     <img
       src="../../../assets/header/download.svg"
       alt="icon for download the canvas" />
   </button>
+
+  <mat-menu #menu="matMenu">
+    <div class="ext-list">
+      <span mat-menu-item (click)="onSave('syk')">.syk</span>
+      <span mat-menu-item (click)="onSave('png')">.png</span>
+      <span mat-menu-item (click)="onSave('jpeg')">.jpeg</span>
+      <span mat-menu-item (click)="onSave('webp')">.webp</span>
+    </div>
+  </mat-menu>
 </div>

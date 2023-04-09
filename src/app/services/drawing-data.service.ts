@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CanvasService } from './canvas.service';
 
 /**
@@ -15,6 +16,8 @@ export class DrawingDataService {
   private lineWidth = 2;
   private isDrawing = false;
   private fill = false;
+
+  title$: BehaviorSubject<string> = new BehaviorSubject<string>('');
   states: HTMLCanvasElement[] = [];
   indexState = 0;
 
