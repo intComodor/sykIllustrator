@@ -95,4 +95,14 @@ export class DrawingBoardComponent implements AfterViewInit {
   onExitFullScreenMode() {
     this.canvasService.setFullScreenMode(false);
   }
+
+  @HostListener('document:keydown.control.shift.z', ['$event'])
+  handleKeyboardRedo(event: KeyboardEvent) {
+    this.drawingDataService.redo();
+  }
+
+  @HostListener('document:keydown.control.z', ['$event'])
+  handleKeyboardUndo(event: KeyboardEvent) {
+    this.drawingDataService.undo();
+  }
 }
