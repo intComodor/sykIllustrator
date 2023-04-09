@@ -1,6 +1,5 @@
 import { CouplePoints } from './couplePoints';
 import { Pencil } from './pencil';
-import { Tool } from './tool';
 
 export class Eraser extends Pencil {
   constructor() {
