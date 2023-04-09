@@ -3,17 +3,17 @@
     (click)="onUndo()"
     [class.btnDisabled]="!undoAvailable()"
     [matTooltip]="undoAvailable() ? 'undo' : ''">
-    <img src="../../../assets/header/undo.svg" alt="icon for undo action" />
+    <img src="./assets/header/undo.svg" alt="icon for undo action" />
   </button>
   <button
     (click)="onRedo()"
     [class.btnDisabled]="!redoAvailable()"
     [matTooltip]="redoAvailable() ? 'redo' : ''">
-    <img src="../../../assets/header/redo.svg" alt="icon for redo action" />
+    <img src="./assets/header/redo.svg" alt="icon for redo action" />
   </button>
   <label for="file-input" class="file-input-label">
     <button (click)="fileInput.click()">
-      <img src="../../../assets/header/upload.svg" alt="icon for import file" />
+      <img src="./assets/header/upload.svg" alt="icon for import file" />
     </button>
   </label>
   <input
@@ -25,19 +25,13 @@
     #fileInput
     style="display: none" />
   <button matTooltip="full screen mode" (click)="onFullScreen()">
-    <img
-      src="../../../assets/header/fullscreen.svg"
-      alt="icon for fullscreen mode" />
+    <img src="./assets/header/fullscreen.svg" alt="icon for fullscreen mode" />
   </button>
   <button (click)="onChangeFormat()" matTooltip="change format">
-    <img
-      src="../../../assets/header/formats.svg"
-      alt="icon for change format" />
+    <img src="./assets/header/formats.svg" alt="icon for change format" />
   </button>
   <button (click)="onClear()" matTooltip="clear canvas">
-    <img
-      src="../../../assets/header/delete.svg"
-      alt="icon for clear the canvas" />
+    <img src="./assets/header/delete.svg" alt="icon for clear the canvas" />
   </button>
 
   <input
@@ -49,7 +43,7 @@
 
   <button [matMenuTriggerFor]="menu">
     <img
-      src="../../../assets/header/download.svg"
+      src="./assets/header/download.svg"
       alt="icon for download the canvas" />
   </button>
 
