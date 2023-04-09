@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { CanvasService } from 'src/app/services/canvas.service';
 import { DrawingDataService } from 'src/app/services/drawing-data.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -14,7 +15,9 @@ import { StorageService } from 'src/app/services/storage.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
   constructor(
     private canvasService: CanvasService,
     private drawingDataService: DrawingDataService,
@@ -27,12 +30,20 @@ export class HeaderComponent {
    */
   filename = new FormControl('');
 
+  ngOnInit(): void {
+    this.drawingDataService.title$.subscribe(title => {
+      this.filename.setValue(title);
+    });
+  }
+
   /**
    * Function called when the user clicks on the save button.
    * It converts the canvas to a blob and then download it.
    */
-  onSave() {
-    this.storageService.exportToPng(this.filename.value);
+  onSave(ext: string) {
+    if (ext === 'syk')
+      this.storageService.storeDrawingInFile(this.filename.value);
+    else this.storageService.export(this.filename.value, ext);
   }
 
   /**
@@ -44,6 +55,19 @@ export class HeaderComponent {
     this.canvasService.changeFormat();
   }
 
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+
+    this.storageService
+      .restoreDrawingFromFile(file)
+      .subscribe((title: string) => {
+        this.filename.setValue(title);
+      });
+
+    // to enable the user to select the same file twice
+    (this.fileInput.nativeElement as HTMLInputElement).value = '';
+  }
+
   /**
    * Function called when the user clicks on the clear button.
    * @see src/app/services/canvas.service.ts
@@ -52,6 +76,7 @@ export class HeaderComponent {
   onClear() {
     this.canvasService.clear('withConfirmation');
     this.drawingDataService.clearStates();
+    this.filename.setValue('');
   }
 
   /**
@@ -80,5 +105,12 @@ export class HeaderComponent {
       this.drawingDataService.indexState <
       this.drawingDataService.states.length - 1
     );
+  }
+
+  onFilenameChange() {
+    this.drawingDataService.title$.next(this.filename.value || '');
+    // this.drawingDataService.title$.subscribe(title => {
+    //   console.log(title);
+    // });
   }
 }

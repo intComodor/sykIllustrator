@@ -15,6 +15,7 @@ import { NgxColorsModule } from 'ngx-colors';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SnakeBarComponent } from './components/snake-bar/snake-bar.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     NgxColorsModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    MatMenuModule,
   ],
   providers: [DrawingDataService, MouseEventService],
   bootstrap: [AppComponent],
