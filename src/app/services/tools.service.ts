@@ -5,6 +5,7 @@ import { RectForm } from 'src/app/types/rect-form';
 import { Line } from '../types/line';
 import { Eraser } from '../types/eraser';
 import { Triangle } from '../types/triangle';
+import { Circle } from '../types/circle';
 
 /**
  * Tools service.
@@ -21,6 +22,7 @@ export class ToolsService {
     ['RectForm', new RectForm()],
     ['Eraser', new Eraser()],
     ['Triangle', new Triangle()],
+    ['Circle', new Circle()],
   ]);
 
   private defaultTool = 'Pencil';

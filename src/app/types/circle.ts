@@ -1,9 +1,9 @@
 import { CouplePoints } from './couplePoints';
 import { Tool } from './tool';
 
-export class Triangle extends Tool {
+export class Circle extends Tool {
   constructor() {
-    super('Triangle', 'black');
+    super('Circle', 'black');
   }
 
   /** Coordinates of the rectangle to draw */
@@ -73,9 +73,9 @@ export class Triangle extends Tool {
       this.drawingDataService.getLineWidth();
 
     ctx.beginPath();
-    ctx.moveTo(coords.startX, coords.startY);
-    ctx.lineTo(coords.endX, coords.endY);
-    ctx.lineTo(coords.startX - (coords.endX - coords.startX), coords.endY);
+    const radius =
+      (coords.endX - coords.startX + (coords.endY - coords.startY)) / 2;
+    ctx.arc(coords.startX, coords.startY, radius, 0, 2 * Math.PI);
     ctx.closePath();
     if (this.drawingDataService.isFill()) ctx.fill();
     else ctx.stroke();

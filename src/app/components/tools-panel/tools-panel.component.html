@@ -41,5 +41,12 @@
       [class.tool-selected]="'Triangle' === currentTool()">
       <img src="../../../assets/shapes/triangle.svg" alt="triangle shape" />
     </div>
+    <div
+      matTooltip="triangle shape"
+      class="box-shape"
+      (click)="changeTool('Circle')"
+      [class.tool-selected]="'Circle' === currentTool()">
+      <img src="../../../assets/shapes/circle.svg" alt="triangle shape" />
+    </div>
   </div>
 </div>
