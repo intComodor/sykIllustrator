@@ -41,7 +41,7 @@ Voici une liste des principales fonctionnalités que nous avons implémentées :
 
 Concernant l'architecture notre application est composé de 5 composants : 
 - Drawing board 
- -Header
+- Header
 - Option panel
 - Snake-bar panel
 - Tools panel
