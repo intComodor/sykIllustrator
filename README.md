@@ -1,9 +1,9 @@
 # SykIllustrator
 
 ## Utilisation de l'application
-Voici le lien où est herbergée l'application en ligne intcomodor.github.io/sykIllustrator/.
-Si vous souhaitez utiliser ce code en local, vous pouvez lancer la commande ng serve aprés avoir fait un npm install à l'endroit du package.json.
-Veillez a avoir installer angular a l'aide la commande : `npm install -g @angular/cli`
+Voici le lien où est hebergée l'application en ligne intcomodor.github.io/sykIllustrator/.
+Si vous souhaitez utiliser ce code en local, vous pouvez lancer la commande ng serve après avoir fait un npm install à l'endroit du package.json.
+Veuillez à avoir installer angular à l'aide la commande : `npm install -g @angular/cli`
 
 
 ## Explications 
