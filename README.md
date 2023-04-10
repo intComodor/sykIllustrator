@@ -55,7 +55,7 @@ Concernant l'architecture notre application est composé de 5 composants :
 
  #### Outils et formes
 
-Pour les outils nous avons une classe abstraite Tool, ainsi chaque outil va hériter des méthodes initTool, draw et disableTool pour implémenter la leur logique.
+Pour les outils nous avons une classe abstraite Tool, ainsi chaque outil va hériter des méthodes initTool, draw et disableTool pour implémenter leur logique.
 initTool permet de souscrire aux événements de souris sur le canvas, permettant de dessiner une prévisualisation quand le clic est enfoncé et de dessiner le trait final lorsque la souris est relâchée par exemple.
 disableTool est une méthode dont le code est commun à chacun des outils, on souscrit simplement à chacun des événements pour empêcher que deux outils ne soient actifs en même temps.
 
